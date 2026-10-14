@@ -8,7 +8,7 @@ What's inside:
 
 - **Study guide**: condensed notes from each topic's lecture slides
 - **Flashcards**: 79 cards with a topic filter
-- **True / False** and **Multiple choice**: bubble-sheet style sections you grade all at once
+- **True / False** and **Multiple choice**: bubble-sheet style sections you grade all at once, each with three forms (A, B, C) of different questions on the same topics
 - **Essay**: written prompts with grading points and model answers
 - **Code writing**: handwritten TypeScript problems with grading points and model answers
 
