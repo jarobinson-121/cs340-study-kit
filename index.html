@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="CS 340 Midterm 1 study guide, flashcards, and practice true/false, multiple choice, essay and code-writing questions.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>CS 340 Midterm 1 Study Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a UML-class-box notebook — topic sections drawn as class boxes with «stereotype» headers, tabs for guide / flashcards / quiz / exam prompts */
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --ink:#14213a; --muted:#5a6680; --line:#cdd5e2;
+  --accent:#0b3d7a; --accent-soft:#e3ecf8; --mark:#fff1a8; --good:#1d7a4a; --good-soft:#e2f4ea; --bad:#b3261e; --bad-soft:#fbe6e4;
+  --code-bg:#eef2f8;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1520; --surface:#161e2c; --ink:#e4e9f2; --muted:#9aa6bd; --line:#2c3850;
+  --accent:#8db8f2; --accent-soft:#1d2c46; --mark:#5a4d12; --good:#6fd39b; --good-soft:#163526; --bad:#ff8f86; --bad-soft:#3e1c1a;
+  --code-bg:#1c2638; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1520; --surface:#161e2c; --ink:#e4e9f2; --muted:#9aa6bd; --line:#2c3850;
+  --accent:#8db8f2; --accent-soft:#1d2c46; --mark:#5a4d12; --good:#6fd39b; --good-soft:#163526; --bad:#ff8f86; --bad-soft:#3e1c1a;
+  --code-bg:#1c2638; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:28px 64px}
+header h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.05;margin:0 0 .4rem;text-wrap:balance;letter-spacing:-.01em}
+header .stereo{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+header p{margin:.3rem 0 0;color:var(--muted);max-width:62ch}
+.exam{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-family:var(--mono);font-size:.78rem;border:1px solid var(--line);background:var(--surface);padding:4px 10px;border-radius:999px;color:var(--ink)}
+.chip.hot{border-color:var(--accent);color:var(--accent)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;overflow-x:auto;border-bottom:2px solid var(--line);margin:24px 0 20px;padding-top:6px}
+nav.tabs button{font:600 .95rem var(--body);background:none;border:0;color:var(--muted);padding:10px 14px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+button:focus-visible,select:focus-visible,.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.filter{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.filter label{font-size:.85rem;color:var(--muted)}
+select{font:inherit;padding:6px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn{font:600 .9rem var(--body);padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+/* UML class-box topic */
+.cls{background:var(--surface);border:1.5px solid var(--ink);margin-bottom:22px}
+.cls>.hd{border-bottom:1.5px solid var(--ink);padding:10px 16px;text-align:center}
+.cls>.hd .st{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.cls>.hd h2{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:0;text-wrap:balance}
+.cls>.hd .src{font-size:.78rem;color:var(--muted)}
+.cls>.bd{padding:6px 18px 16px}
+.cls h3{font-family:var(--display);font-weight:600;font-size:1.05rem;margin:18px 0 6px;color:var(--accent)}
+.cls ul{margin:6px 0;padding-left:1.2rem}
+.cls li{margin:3px 0}
+.cls p{margin:6px 0;max-width:70ch}
+mark{background:var(--mark);color:inherit;padding:0 2px}
+code{font-family:var(--mono);font-size:.86em;background:var(--code-bg);padding:1px 5px;border-radius:3px}
+pre{font-family:var(--mono);font-size:.82rem;background:var(--code-bg);padding:12px 14px;overflow-x:auto;border-radius:4px;line-height:1.45;margin:8px 0}
+pre code{background:none;padding:0}
+.tbl{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:700}
+.trap{border-left:3px solid var(--bad);background:var(--bad-soft);padding:8px 12px;margin:10px 0;font-size:.92rem}
+.trap b{color:var(--bad)}
+/* flashcards */
+.fc-stage{display:flex;flex-direction:column;align-items:center;gap:14px}
+.card{width:100%;max-width:620px;min-height:240px;background:var(--surface);border:1.5px solid var(--ink);padding:24px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.card .side{font-family:var(--mono);font-size:.72rem;color:var(--muted);position:absolute;top:10px;left:14px}
+.card .tp{font-family:var(--mono);font-size:.72rem;color:var(--muted);position:absolute;top:10px;right:14px}
+.card .txt{font-size:1.15rem;min-width:0}
+.card.back{background:var(--accent-soft)}
+.card .txt.ans{font-size:1rem;text-align:left}
+.fc-ctrl{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+.count{font-family:var(--mono);font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+/* quiz */
+.q{background:var(--surface);border:1px solid var(--line);padding:16px 18px;margin-bottom:14px}
+.q .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.q .stem{font-weight:700;margin:4px 0 10px}
+.opts{display:grid;gap:6px}
+.opt{font:inherit;text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:8px 12px;border-radius:5px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.why{margin-top:10px;font-size:.92rem;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft)}
+.score{position:sticky;bottom:0;background:var(--surface);border:1.5px solid var(--ink);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-variant-numeric:tabular-nums;margin-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+/* prompts */
+details.pr{background:var(--surface);border:1px solid var(--line);margin-bottom:12px}
+details.pr summary{cursor:pointer;padding:14px 16px;font-weight:700;list-style:none}
+details.pr summary::-webkit-details-marker{display:none}
+details.pr summary .meta{display:block;font-family:var(--mono);font-size:.72rem;color:var(--muted);font-weight:400}
+details.pr summary::after{content:"Show model answer ▾";display:block;font-weight:400;font-size:.82rem;color:var(--accent);margin-top:4px}
+details.pr[open] summary::after{content:"Hide ▴"}
+details.pr .ans{padding:0 16px 14px;border-top:1px dashed var(--line)}
+footer{margin-top:40px;font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:background-color .2s}}
+/* exam sections */
+.sec-intro{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-intro p{margin:0;color:var(--muted);max-width:60ch;font-size:.93rem}
+.toggle{font-size:.85rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.bubbles{display:flex;flex-wrap:wrap;gap:6px;background:var(--surface);border:1px solid var(--line);padding:10px 12px;margin-bottom:16px}
+.bubbles .lbl{width:100%;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.bub{font:600 .72rem var(--mono);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-variant-numeric:tabular-nums;padding:0}
+.bub.filled{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.bub.ok{background:var(--good);border-color:var(--good);color:var(--bg)}
+.bub.no{background:var(--bad);border-color:var(--bad);color:var(--bg)}
+.opt.sel{border-color:var(--ink);background:var(--accent-soft);font-weight:700}
+.tf .opts{grid-template-columns:repeat(2,minmax(0,140px))}
+textarea.work{width:100%;min-height:150px;font:400 .85rem/1.5 var(--mono);background:var(--bg);color:var(--ink);border:1px dashed var(--muted);border-radius:4px;padding:10px 12px;resize:vertical;tab-size:2}
+textarea.essay{font-family:var(--body);font-size:.95rem;min-height:130px}
+.pq{background:var(--surface);border:1px solid var(--line);padding:16px 18px;margin-bottom:16px}
+.pq .meta{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.pq .stem{font-weight:700;margin:4px 0 8px}
+.pq .stem pre,.pq .given pre{font-weight:400}
+.pq .given{font-size:.92rem}
+.pq .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.rubric{margin-top:12px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-size:.92rem}
+.rubric h4{margin:0 0 4px;font-family:var(--display);font-weight:600;font-size:.95rem}
+.rubric ul{margin:4px 0;padding-left:1.2rem}
+.rubric label{display:flex;gap:8px;align-items:flex-start;margin:3px 0}
+.saved{font-family:var(--mono);font-size:.72rem;color:var(--muted);align-self:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="stereo">«study kit» CS 340 · Software Design · Fall 2026 (TTh)</div>
+  <h1>Midterm 1 Study Kit</h1>
+  <p>Built from the lecture slides and readings for every topic from TypeScript Fundamentals through User Interface Architecture.</p>
+  <div class="exam">
+    <span class="chip hot">Testing Center · Mon Oct 12 – Wed Oct 14</span>
+    <span class="chip">Late fee starts Wed 2:00 pm</span>
+    <span class="chip">T/F · M/C · essay</span>
+    <span class="chip">Code is TypeScript</span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="t-guide" aria-selected="true" data-p="guide">Study guide</button>
+  <button role="tab" id="t-fc" aria-selected="false" data-p="fc">Flashcards</button>
+  <button role="tab" id="t-tf" aria-selected="false" data-p="tf">True / False</button>
+  <button role="tab" id="t-mc" aria-selected="false" data-p="mc">Multiple choice</button>
+  <button role="tab" id="t-es" aria-selected="false" data-p="es">Essay</button>
+  <button role="tab" id="t-cw" aria-selected="false" data-p="cw">Code writing</button>
+</nav>
+
+<!-- ===================== STUDY GUIDE ===================== -->
+<section id="p-guide" role="tabpanel">
+
+<div class="cls" id="ts">
+  <div class="hd"><div class="st">«topic» Day 1–2</div><h2>TypeScript Fundamentals</h2><div class="src">Slides: TypeScript Introduction · TypeScript Projects</div></div>
+  <div class="bd">
+    <h3>Why TypeScript</h3>
+    <ul>
+      <li>TypeScript = JavaScript + type syntax + <mark>compile-time static typing</mark>.</li>
+      <li>JavaScript is dynamically typed: type errors show up only at runtime, and JS silently converts values (<code>3 + [1]</code> gives <code>"31"</code>).</li>
+      <li>TypeScript catches those errors at compile time and refuses dubious implicit conversions.</li>
+    </ul>
+    <h3>Annotations and inference</h3>
+    <ul>
+      <li>Annotations (<code>let x: number</code>) are optional. Without one, TS <mark>infers</mark> the type: <code>let c = [true,false]</code> is <code>boolean[]</code>.</li>
+      <li><code>let x = "howdy"</code> widens to <code>string</code>; <code>const x = "howdy"</code> keeps the <mark>literal type</mark> <code>"howdy"</code>.</li>
+    </ul>
+    <h3>The types to know</h3>
+    <div class="tbl"><table>
+      <tr><th>Type</th><th>Key facts</th></tr>
+      <tr><td><code>boolean, string, number</code></td><td>Strings are immutable; template literals use backticks and <code>${expr}</code>. <code>number</code> covers ints, floats, <code>Infinity</code>, <code>NaN</code>; <code>1_000_000</code> separators are allowed.</td></tr>
+      <tr><td><code>bigint</code></td><td>Arbitrary-size integers, literal suffix <code>n</code> (<code>10n</code>).</td></tr>
+      <tr><td><code>enum</code></td><td>Named constants. Numeric values start at 0 unless set; members can be strings.</td></tr>
+      <tr><td><code>undefined</code> vs <code>null</code></td><td><code>undefined</code> = absence of a value (uninitialized variables). <code>null</code> = a reference to nothing, assigned on purpose (<code>Date | null</code>).</td></tr>
+      <tr><td>Object types</td><td>Listed property names and types. <code>?</code> marks optional properties. Extra properties on an object literal are an error.</td></tr>
+      <tr><td>Union <code>A | B</code></td><td>Value is one of the types.</td></tr>
+      <tr><td>Intersection <code>A &amp; B</code></td><td>Value must have <em>all</em> members of both.</td></tr>
+      <tr><td>Arrays <code>T[]</code></td><td>Mixed literals infer a union array <code>(string|number)[]</code>. <code>const</code> blocks reassignment, not mutation.</td></tr>
+      <tr><td>Tuples</td><td>Fixed length, a type per position. Must be <mark>explicitly typed</mark> (a literal alone infers an array). Support optional <code>?</code> and rest <code>...T[]</code> elements.</td></tr>
+      <tr><td><code>any</code></td><td>Turns off type checking. Avoid; useful for untyped JS libraries.</td></tr>
+      <tr><td><code>unknown</code></td><td>Type is not known. You <mark>cannot use it until you narrow it</mark> (<code>typeof</code> checks, <code>as</code> assertions).</td></tr>
+      <tr><td><code>object</code></td><td>Any non-primitive (objects, arrays, functions). Primitives are errors.</td></tr>
+    </table></div>
+    <div class="trap"><b>Common trap:</b> <code>any</code> vs <code>unknown</code>. Both accept any value, but only <code>any</code> lets you call methods on it without checking.</div>
+    <h3>Structural typing</h3>
+    <p>Compatibility depends on <mark>shape</mark> (property names and types), not the declared name. Two unrelated classes or a plain object literal are interchangeable if their public members match.</p>
+    <h3>Type aliases</h3>
+    <p><code>type Age = number;</code> names any type for reuse: primitives, object shapes, unions.</p>
+    <h3>Functions</h3>
+    <ul>
+      <li>Four forms: named function, function expression, arrow function, shorthand arrow (implicit return).</li>
+      <li>Return type can be inferred. <code>void</code> when nothing is returned.</li>
+      <li>Optional <code>p?: T</code>, default <code>p = 5</code>, rest <code>...nums: number[]</code>.</li>
+      <li>Function types: <code>type EventReceiver = (evt: Event) =&gt; boolean;</code>. Parameter names are not part of the type. Used for callbacks.</li>
+    </ul>
+    <h3>Projects, modules, declaration files</h3>
+    <ul>
+      <li>Setup: <code>npm init --yes</code> → <code>npm install typescript @types/node --save-dev</code> → <code>npx tsc --init</code>.</li>
+      <li><code>tsconfig.json</code>: <code>target</code> (JS version, ESNext), <code>module</code> (commonjs), <code>outDir</code> (dist), <code>sourceMap</code> (maps JS lines back to TS for debugging), <code>include</code> (["src"]).</li>
+      <li><code>tsc</code> outputs source code, not bytecode, so it is called <mark>transpiling</mark>.</li>
+      <li>A file with a top-level <code>import</code>/<code>export</code> is a <mark>module</mark> with its own scope; without one it is a <mark>script</mark> in global scope.</li>
+      <li>Export: <code>export class X</code> or <code>export { a as b }</code>. Import: named <code>import { A } from "./a"</code>, renamed <code>{ A as B }</code>, namespace <code>import * as people from "./person"</code>.</li>
+      <li><code>.d.ts</code> files give type info for plain JS libraries (like C headers). They enable autocomplete, and <code>tsc</code> can generate them from your TS.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cls" id="tsc">
+  <div class="hd"><div class="st">«topic» Day 2</div><h2>TypeScript Classes and Interfaces</h2><div class="src">Slides: TypeScript Classes and Interfaces (chess example)</div></div>
+  <div class="bd">
+    <h3>Classes</h3>
+    <ul>
+      <li>Default member visibility is <code>public</code>. Also <code>private</code>, <code>protected</code> (subclasses only), <code>readonly</code>.</li>
+      <li><mark>Parameter properties</mark>: <code>constructor(private file: File, private rank: Rank)</code> declares and assigns fields in one step.</li>
+      <li><code>abstract class Piece</code> cannot be instantiated. <code>abstract canMoveTo(p): boolean</code> has no body; subclasses must implement it. A <code>protected constructor</code> means only subclasses can call it.</li>
+      <li><code>class King extends Piece</code>: single inheritance only. <code>super(...)</code> calls the parent constructor or methods.</li>
+      <li><code>static</code> members are called on the class (<code>Game.makePieces()</code>).</li>
+      <li>Accessors: <code>get age()</code> / <code>set age(v)</code> backed by <code>_age</code>; the setter can validate and throw.</li>
+    </ul>
+<pre><code>abstract class Piece {
+  protected position: Position;
+  protected constructor(private readonly color: Color, file: File, rank: Rank) {
+    this.position = new Position(file, rank);
+  }
+  moveTo(position: Position) { this.position = position; }
+  abstract canMoveTo(position: Position): boolean;
+}
+class King extends Piece {
+  constructor(color: Color, file: File, rank: Rank) { super(color, file, rank); }
+  canMoveTo(position: Position) {
+    const d = this.position.distanceFrom(position);
+    return d.rank &lt; 2 &amp;&amp; d.file &lt; 2;
+  }
+}</code></pre>
+    <h3>Interfaces vs type aliases</h3>
+    <div class="tbl"><table>
+      <tr><th></th><th><code>interface</code></th><th><code>type</code></th></tr>
+      <tr><td>Can describe</td><td>Object shapes only</td><td>Anything: primitives, unions, intersections, objects</td></tr>
+      <tr><td>Extending</td><td><code>interface Sushi extends Food</code></td><td><code>type Sushi = Food &amp; {…}</code></td></tr>
+      <tr><td>Conflicting member when extending</td><td>Compile error (TS2430): <mark>stricter checking</mark></td><td>Intersection silently produces an unusable member</td></tr>
+      <tr><td>Declared twice</td><td><mark>Declarations merge</mark></td><td>Duplicate identifier error (TS2300)</td></tr>
+    </table></div>
+    <ul>
+      <li>A class can <code>implements</code> zero or more interfaces and <code>extends</code> zero or one class.</li>
+      <li><code>instanceof</code> checks class ancestry at runtime. It <mark>cannot check interfaces</mark>, because interfaces don't exist at runtime.</li>
+      <li><code>readonly</code> works on class, interface and type fields; <code>readonly number[]</code> blocks <code>push</code> and index assignment.</li>
+      <li>Private/protected members make structural compatibility stricter: the member must come from the same declaration.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cls" id="react">
+  <div class="hd"><div class="st">«topic» Day 3</div><h2>React Fundamentals</h2><div class="src">Slides: React Fundamentals</div></div>
+  <div class="bd">
+    <h3>What React is</h3>
+    <ul>
+      <li>A JS library for building <mark>single-page applications</mark> from reusable components.</li>
+      <li>Key ideas: component-based architecture, <mark>virtual DOM</mark> (minimizes direct DOM manipulation), <mark>unidirectional data flow</mark> (parent → child via props).</li>
+      <li>The DOM is the browser's live tree representation of the page; scripts read and change it.</li>
+    </ul>
+    <h3>Traditional web app vs SPA</h3>
+    <div class="tbl"><table>
+      <tr><th>Traditional</th><th>Single-page app</th></tr>
+      <tr><td>Every action sends an HTTP request; server returns a whole new HTML page.</td><td>First request returns the app (HTML + JS). JS updates the DOM locally.</td></tr>
+      <tr><td>Heavy server load, idle browser, latency, sluggish UI.</td><td>When data is needed, JS calls a web API (usually JSON) and updates only part of the DOM.</td></tr>
+    </table></div>
+    <h3>Components, JSX, props</h3>
+    <ul>
+      <li>A component = a function returning JSX plus the logic/event handlers it needs.</li>
+      <li>JSX is HTML-like syntax that a transpiler (Babel) turns into <code>React.createElement(type, props, ...children)</code>. Files: <code>.jsx</code> / <code>.tsx</code>.</li>
+      <li>A component must return <mark>one root element</mark>; use a fragment <code>&lt;&gt;…&lt;/&gt;</code> to avoid an extra <code>div</code>.</li>
+      <li>Props are typed with an interface and passed like attributes: <code>&lt;UserItem value={user} /&gt;</code>.</li>
+      <li>Vite project: <code>index.html</code> host page → <code>src/main.tsx</code> initializes → <code>src/App.tsx</code> root of the component tree.</li>
+    </ul>
+<pre><code>interface Props { value: User; }
+const UserItem = (props: Props) =&gt; (
+  &lt;div&gt;&lt;img src={props.value.imageUrl} /&gt; {props.value.alias}&lt;/div&gt;
+);</code></pre>
+    <h3>Conditional rendering</h3>
+    <ul>
+      <li>If/else: <code>{isAuthenticated() ? &lt;AuthenticatedRoutes /&gt; : &lt;UnauthenticatedRoutes /&gt;}</code></li>
+      <li>If-only: <code>{!displayedUser.equals(currentUser) &amp;&amp; &lt;Link…/&gt;}</code></li>
+      <li>Guard: return <code>&lt;&gt;&lt;/&gt;</code> when required values are null.</li>
+      <li>Helper functions can return JSX (<code>JSX.Element</code>).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cls" id="router">
+  <div class="hd"><div class="st">«topic» Day 3</div><h2>React Router</h2><div class="src">Slides: React Router</div></div>
+  <div class="bd">
+    <ul>
+      <li>Maps URLs to app states inside an SPA, keeping history, back/forward and bookmarks working.</li>
+      <li><code>&lt;BrowserRouter&gt;</code> once near the root → <code>&lt;Routes&gt;</code> container → <code>&lt;Route path element&gt;</code> mappings.</li>
+    </ul>
+    <div class="tbl"><table>
+      <tr><th>Route form</th><th>Meaning</th></tr>
+      <tr><td><code>path="/login"</code></td><td>Exact path</td></tr>
+      <tr><td><code>index</code></td><td>Parent's empty/default path</td></tr>
+      <tr><td><code>path="/user/:userId"</code></td><td>Dynamic segment, read with <code>useParams()</code></td></tr>
+      <tr><td><code>path="/user/:userId?"</code></td><td>Optional segment</td></tr>
+      <tr><td><code>path="/user/*"</code></td><td>Splat: anything (or nothing) after <code>/user/</code></td></tr>
+      <tr><td><code>path="*"</code></td><td>Catch-all default route</td></tr>
+      <tr><td>No <code>path</code>, just <code>element</code></td><td><mark>Layout route</mark>: children render in the layout's <code>&lt;Outlet /&gt;</code></td></tr>
+    </table></div>
+    <ul>
+      <li><code>&lt;Navigate to="/feed" /&gt;</code> is a declarative redirect (a component). <code>const navigate = useNavigate(); navigate("/feed")</code> is imperative (a function).</li>
+      <li><code>&lt;Link to&gt;</code> for normal links; <code>&lt;NavLink&gt;</code> for nav bars (knows when it's active).</li>
+      <li>Router hooks/components only work inside <code>BrowserRouter</code>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="cls" id="hooks">
+  <div class="hd"><div class="st">«topic» Day 4</div><h2>React Hooks and State</h2><div class="src">Slides: React Hooks · React State</div></div>
+  <div class="bd">
+    <h3>Hook rules</h3>
+    <ul>
+      <li>Hooks give functional components features that used to need class components, and let you reuse logic without inheritance.</li>
+      <li>Names start with <code>use</code>. Call them <mark>only from functional components or other hooks</mark>.</li>
+    </ul>
+    <h3>The six hooks the review sheet names</h3>
+    <div class="tbl"><table>
+      <tr><th>Hook</th><th>What it does</th><th>Returns</th></tr>
+      <tr><td><code>useState</code></td><td>Remembers a value across renders <mark>and</mark> re-renders when it changes</td><td><code>[value, setValue]</code></td></tr>
+      <tr><td><code>useRef</code></td><td>Remembers a value across renders but <mark>does not</mark> re-render when changed</td><td><code>{ current }</code></td></tr>
+      <tr><td><code>useEffect</code></td><td>Runs side-effect logic after render</td><td>nothing</td></tr>
+      <tr><td><code>useCallback</code></td><td>Memoizes a <mark>function</mark> between renders</td><td>the function</td></tr>
+      <tr><td><code>useMemo</code></td><td>Memoizes a <mark>value</mark> (often an object)</td><td>the value</td></tr>
+      <tr><td><code>useContext</code></td><td>Reads shared state from a Provider without prop drilling; publish/subscribe re-render</td><td>the context value</td></tr>
+    </table></div>
+    <h3>useEffect dependency array</h3>
+    <div class="tbl"><table>
+      <tr><th>Second argument</th><th>Runs</th></tr>
+      <tr><td>omitted</td><td>after every render</td></tr>
+      <tr><td><code>[]</code></td><td>only after the first render</td></tr>
+      <tr><td><code>[a, b]</code></td><td>first render, then whenever <code>a</code> or <code>b</code> changes</td></tr>
+    </table></div>
+    <h3>useState details</h3>
+    <ul>
+      <li>Regular local variables are re-initialized on every render; state survives.</li>
+      <li>Prefer the functional updater to avoid stale values: <code>setItems(prev =&gt; [...prev, ...newItems])</code>.</li>
+      <li>Updating one field of an object: <code>setInfo(prev =&gt; ({ ...prev, displayedUser: user }))</code>.</li>
+    </ul>
+    <h3>Context in three steps</h3>
+    <ol>
+      <li><code>export const UserInfoContext = createContext&lt;UserInfo&gt;(defaultUserInfo);</code></li>
+      <li>Write a Provider component that holds the state and supplies values/functions.</li>
+      <li>Wrap it around every component that needs it (Tweeter nests the providers in <code>index.tsx</code>), then read with <code>const { updateUserInfo } = useContext(UserInfoContext);</code></li>
+    </ol>
+    <h3>Router hooks</h3>
+    <ul>
+      <li><code>useNavigate</code> → navigate function. <code>useLocation</code> → <code>location.pathname</code>.</li>
+      <li><code>useParams</code> → <code>{ displayedUser }</code> for <code>feed/:displayedUser</code>. <code>useSearchParams</code> → <code>[searchParams, setSearchParams]</code>; <code>searchParams.get("page")</code>.</li>
+    </ul>
+    <h3>Custom hooks</h3>
+    <p>A function named <code>useX</code> that calls other hooks and returns values/functions (Tweeter's <code>useMessageActions</code> wraps <code>useContext(ToastActionsContext)</code>). Reasons: reuse, abstraction, separation of concerns (SRP), testability, sharing across projects.</p>
+    <div class="trap"><b>Common trap:</b> <code>useCallback</code> memoizes a function, <code>useMemo</code> memoizes a value. Tweeter uses both together: functions wrapped in <code>useCallback</code>, grouped into an object wrapped in <code>useMemo</code>.</div>
+  </div>
+</div>
+
+<div class="cls" id="uml">
+  <div class="hd"><div class="st">«topic» Day 5</div><h2>Modeling and UML</h2><div class="src">Slides: UML Class Diagrams · plus sequence diagram exercise</div></div>
+  <div class="bd">
+    <h3>Models</h3>
+    <ul>
+      <li>A model is an <mark>abstraction</mark> of a system from a chosen viewpoint and level of abstraction. Modeling manages complexity by ignoring irrelevant detail.</li>
+      <li>Why model software: visualize/understand it, document and communicate the design, guide construction.</li>
+      <li>Three ways to use UML: <mark>sketch</mark> (agile, informal), <mark>blueprint</mark> (big design up front), <mark>programming language</mark> (code generation, 1990s).</li>
+      <li>Levels: conceptual (understand the problem) → high-level design → low-level design → implementation (do that in code, not UML).</li>
+      <li>Structural diagrams: class, package, object, component, deployment. Behavioral: use case, state, activity, communication, <mark>sequence</mark>.</li>
+    </ul>
+    <h3>Class diagram notation</h3>
+    <div class="tbl"><table>
+      <tr><th>Notation</th><th>Meaning</th></tr>
+      <tr><td>Box: name / attributes / methods</td><td>Class (any compartment may be omitted)</td></tr>
+      <tr><td><code>+ - # ~ /</code>, underline</td><td>public, private, protected, package, derived, static</td></tr>
+      <tr><td><code>name : Name [1..*]</code></td><td>Attribute with multiplicity (default 1)</td></tr>
+      <tr><td>Underlined name</td><td>Object (instance)</td></tr>
+      <tr><td>Solid line, optional name and role names</td><td>Association. Multiplicities: <code>1, 0..1, *, 1..*, n..m</code></td></tr>
+      <tr><td>Solid line with open arrowhead</td><td>Directed association (navigable one way; design-level only)</td></tr>
+      <tr><td>Hollow diamond at the whole</td><td><mark>Aggregation</mark>: part-of</td></tr>
+      <tr><td>Filled diamond at the whole</td><td><mark>Composition</mark>: part can't exist without the whole; multiplicity at the diamond is always 1</td></tr>
+      <tr><td>Hollow triangle arrow to parent</td><td>Generalization: "is a" (conceptual) / inheritance (design)</td></tr>
+      <tr><td>Dashed line, hollow triangle</td><td>Realization (class implements interface)</td></tr>
+      <tr><td>Dashed arrow</td><td>Dependency (e.g., Accountant uses Calculator)</td></tr>
+      <tr><td><code>{ … }</code> / dog-eared box with dashed line</td><td>Constraint / note</td></tr>
+      <tr><td>Class hung off an association by a dashed line</td><td>Association class (association with its own attributes)</td></tr>
+    </table></div>
+    <p>Conceptual level: a class is a set of objects with common properties, named with a common noun. Design level: a class is a type.</p>
+    <h3>Sequence diagrams (exercise / review sheet)</h3>
+    <ul>
+      <li>Participants across the top, each with a dashed vertical <mark>lifeline</mark>; time flows down.</li>
+      <li>Thin rectangles on a lifeline are <mark>activations</mark> (the object is executing).</li>
+      <li>Solid line + filled arrowhead = synchronous call; dashed line = return; open arrowhead = asynchronous message.</li>
+      <li>Frames: <code>alt</code> (if/else), <code>opt</code> (if), <code>loop</code>.</li>
+    </ul>
+    <div class="trap"><b>Common trap:</b> aggregation vs composition. Filled diamond = stronger ownership. Diamond sits on the <em>whole</em>, not the part.</div>
+  </div>
+</div>
+
+<div class="cls" id="arch">
+  <div class="hd"><div class="st">«topic» Day 6</div><h2>Software Architecture</h2><div class="src">Slides: Software Architecture · Dr. Rodham's Software Architecture</div></div>
+  <div class="bd">
+    <h3>Definitions</h3>
+    <ul>
+      <li><mark>Software architecture</mark>: the large-scale organization of software into subsystems, packages and layers: the major parts, their responsibilities, how they communicate, and why.</li>
+      <li>Design levels: System → Subsystems → Packages (high-level) → Classes → Methods (low-level).</li>
+      <li><mark>Layer</mark>: a coarse, horizontal grouping with cohesive responsibility at one level of abstraction. <mark>Subsystem</mark>: a vertical slice of functionality (Billing, Inventory).</li>
+      <li><mark>Package</mark>: a code-organization unit (Java package, namespace). <mark>Component</mark>: a replaceable unit that hides its implementation behind interfaces.</li>
+      <li>Layer = logical; <mark>tier</mark> = physical (separate machine/process).</li>
+      <li>Architecture defines: subsystems, their responsibilities, dependencies, interfaces, communication, technologies, physical deployment.</li>
+    </ul>
+    <h3>Layered architecture</h3>
+    <ul>
+      <li>Higher layers depend on lower layers; <mark>lower layers never depend on higher ones</mark>.</li>
+      <li><mark>Strict</mark>: depend only on the layer directly below (network stacks). <mark>Relaxed</mark>: depend on any lower layer (business apps).</li>
+      <li>Scenario I: request travels down and fans out; results combine on the way up (TCP/IP). Scenario II: Layer J answers without going lower (caching). Scenario III: events travel up from Layer 1 (interrupts, async I/O).</li>
+      <li>Common layers, top → bottom: UI / communication endpoints → use cases / business logic → domain model / entities → frameworks, libraries, DBs → OS → hardware. Lower = more general and reusable.</li>
+      <li>Errors: a layer's interface includes its errors; map lower-level errors to your layer's abstraction so they don't <mark>leak</mark> upward.</li>
+    </ul>
+    <h3>Benefits vs drawbacks</h3>
+    <div class="tbl"><table>
+      <tr><th>Benefits</th><th>Drawbacks</th></tr>
+      <tr><td>Separation of concerns · <mark>lower coupling</mark> · <mark>higher cohesion</mark> · reuse of lower layers · replaceable layers · clarity · distribution across servers · parallel team work</td><td>Efficiency overhead crossing layers · changes can ripple to adjacent layers (more layers if relaxed) · some dependencies are forbidden</td></tr>
+    </table></div>
+    <p><b>Coupling</b> = how much one element depends on others (minimize). <b>Cohesion</b> = how related an element's operations are (maximize).</p>
+    <h3>Diagrams</h3>
+    <p>High-level: component diagrams (subsystems + dependencies) and <mark>package diagrams</mark> (nested packages, dependencies as dashed arrows pointing downward). Low-level: class diagrams.</p>
+  </div>
+</div>
+
+<div class="cls" id="obs">
+  <div class="hd"><div class="st">«topic» Day 7</div><h2>Design Patterns and Observer</h2><div class="src">Slides: Observer · reading: GoF Ch. 1 and Observer</div></div>
+  <div class="bd">
+    <h3>How to study any pattern (from the review sheet)</h3>
+    <ul><li>Intent / the problem it solves</li><li>Structure: the classes, interfaces and relationships, and why each is there</li><li>When you'd use it and what it buys you</li><li>Be ready to <mark>write it in TypeScript</mark></li></ul>
+    <h3>Observer</h3>
+    <ul>
+      <li><b>Problem:</b> objects (observers) need to know when another object (the subject) changes state, so they can stay in sync or react.</li>
+      <li><b>Solution:</b> the Subject keeps a list of Observers and offers attach/detach. When its state changes it calls <code>notify()</code>, which calls <code>update()</code> on every Observer. Observers depend only on an interface.</li>
+      <li><b>Consequences:</b> observers can be added/removed freely; subject isn't coupled to concrete observers (an example of <mark>dependency inversion</mark>); supports broadcast; but a state change can trigger an unexpectedly expensive cascade of updates.</li>
+      <li><b>Known uses:</b> keeping views in sync with data, session login/logout listeners, history (browser URLs, undo/redo).</li>
+      <li>Java historically had <code>Observer.update(Observable, Object)</code> and <code>Observable.addObserver / deleteObserver / notifyObservers</code>.</li>
+    </ul>
+<pre><code>interface Observer { update(subject: Subject): void; }
+
+abstract class Subject {
+  private observers: Observer[] = [];
+  attach(o: Observer) { this.observers.push(o); }
+  detach(o: Observer) { this.observers = this.observers.filter(x =&gt; x !== o); }
+  protected notify() { this.observers.forEach(o =&gt; o.update(this)); }
+}
+
+class FlightFeed extends Subject {
+  private _flight: Flight | null = null;
+  get flight() { return this._flight; }
+  set flight(f: Flight | null) { this._flight = f; this.notify(); }
+}
+
+class StatusObserver implements Observer {
+  update(subject: Subject) {
+    const f = (subject as FlightFeed).flight;
+    if (f) console.log(`${f.callsign} at ${f.latitude}, ${f.longitude}`);
+  }
+}</code></pre>
+    <p>Push vs pull: the code above is <em>pull</em> (observer reads what it needs from the subject). A <em>push</em> variant passes the changed data in <code>update(data)</code>.</p>
+  </div>
+</div>
+
+<div class="cls" id="ui">
+  <div class="hd"><div class="st">«topic» Day 8</div><h2>User Interface Architecture</h2><div class="src">Slides: User Interface Architecture · reading: MVC, MVP, MVVM</div></div>
+  <div class="bd">
+    <h3>Underlying principles</h3>
+    <ul>
+      <li>Keep <mark>Model code</mark> and <mark>UI code</mark> separate: more understandable, more maintainable (they change for different reasons, see SRP), more reusable (one model, many UIs), and teams don't step on each other.</li>
+      <li>Inside the UI, keep <mark>display code</mark> (views) separate from <mark>input-processing code</mark> (controllers/presenters/view models). Display code is hard to test automatically; input code is easy, so separating them maximizes testable code.</li>
+      <li>The Model implements <mark>Observer</mark> so the UI learns when data changes.</li>
+    </ul>
+    <h3>The three patterns side by side</h3>
+    <div class="tbl"><table>
+      <tr><th></th><th>MVC</th><th>MVP</th><th>MVVM</th></tr>
+      <tr><td>Input handler</td><td>Controller</td><td>Presenter</td><td>ViewModel</td></tr>
+      <tr><td>Who reads the Model to display it</td><td><mark>View</mark> queries Model</td><td><mark>Presenter</mark> queries and pushes into View</td><td>ViewModel queries and sets its properties</td></tr>
+      <tr><td>Who observes the Model</td><td>View</td><td>Presenter</td><td>ViewModel</td></tr>
+      <tr><td>View ↔ handler communication</td><td>Method calls</td><td>Method calls (View has setters and getters)</td><td><mark>Data binding</mark> (property + method bindings)</td></tr>
+      <tr><td>View depends on Model?</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>View is…</td><td>Fairly smart</td><td>"Dumb": shows what it's told</td><td>Declarative (HTML/XML)</td></tr>
+    </table></div>
+    <h3>MVP vs MVC</h3>
+    <p>MVP moves deciding what to display, fetching it from the Model, and observing the Model out of the View into the Presenter. <b>Advantage:</b> more logic sits in the Presenter, which doesn't depend on the UI framework and is easy to unit test; the View loses its Model dependency. <b>Cost:</b> the View interface grows (setters as well as getters) and the Presenter does more work.</p>
+    <h3>MVVM vs MVP</h3>
+    <p>MVVM replaces method calls between View and Presenter with framework-managed data binding. The ViewModel "models the view": its properties map to displayed values and UI state (<code>isSaveEnabled</code>, <code>message</code>), its methods map to user actions. <b>Advantage:</b> much less glue code, and non-programmer designers can build views declaratively. <b>Cost:</b> you depend on a binding framework, and binding behavior can be harder to trace and debug.</p>
+    <h3>MVP in React (Tweeter)</h3>
+    <p>A functional component can't <code>implements</code> an interface, so it builds a <code>const listener: UserInfoPresenterView = { setIsFollower, … }</code> from its state setters, passes it to the Presenter's constructor, and stores the Presenter in <code>useRef</code> so it's created only once.</p>
+<pre><code>const listener: UserInfoPresenterView = {
+  setIsFollower, setFolloweeCount, setFollowerCount,
+  displayErrorMessage,
+};
+const presenterRef = useRef&lt;UserInfoPresenter | null&gt;(null);
+if (!presenterRef.current) presenterRef.current = new UserInfoPresenter(listener);</code></pre>
+  </div>
+</div>
+
+</section>
+
+<!-- ===================== FLASHCARDS ===================== -->
+<section id="p-fc" role="tabpanel" hidden>
+  <div class="filter">
+    <label for="fc-topic">Topic</label>
+    <select id="fc-topic"></select>
+    <button class="btn ghost" id="fc-shuffle">Shuffle</button>
+    <label><input type="checkbox" id="fc-hide"> Hide cards I know</label>
+  </div>
+  <div class="fc-stage">
+    <div class="card" id="fc-card" tabindex="0" role="button" aria-label="Flip card">
+      <span class="side" id="fc-side">TERM</span><span class="tp" id="fc-tp"></span>
+      <div class="txt" id="fc-txt"></div>
+    </div>
+    <div class="fc-ctrl">
+      <button class="btn ghost" id="fc-prev">← Prev</button>
+      <button class="btn" id="fc-flip">Flip</button>
+      <button class="btn ghost" id="fc-next">Next →</button>
+    </div>
+    <div class="fc-ctrl">
+      <button class="btn ghost" id="fc-know">I know this</button>
+      <span class="count" id="fc-count"></span>
+    </div>
+    <p class="count">Click the card or press Space to flip; ← → to move.</p>
+  </div>
+</section>
+
+<!-- ===================== TRUE / FALSE ===================== -->
+<section id="p-tf" role="tabpanel" hidden>
+  <div class="sec-intro">
+    <p>Bubble-sheet section. Answer every statement, then grade the whole section at once, the way the exam scores it.</p>
+    <label class="toggle"><input type="checkbox" id="tf-instant"> Show answers as I go</label>
+  </div>
+  <div class="filter"><label for="tf-topic">Topic</label><select id="tf-topic"></select><button class="btn ghost" id="tf-reset">Clear answers</button></div>
+  <div class="bubbles" id="tf-bubbles"></div>
+  <div id="tf-list"></div>
+  <div class="score"><span id="tf-score"></span><button class="btn" id="tf-grade">Grade section</button></div>
+</section>
+
+<!-- ===================== MULTIPLE CHOICE ===================== -->
+<section id="p-mc" role="tabpanel" hidden>
+  <div class="sec-intro">
+    <p>Bubble-sheet section. Pick one answer per question, then grade the section.</p>
+    <label class="toggle"><input type="checkbox" id="mc-instant"> Show answers as I go</label>
+  </div>
+  <div class="filter"><label for="mc-topic">Topic</label><select id="mc-topic"></select><button class="btn ghost" id="mc-reset">Clear answers</button></div>
+  <div class="bubbles" id="mc-bubbles"></div>
+  <div id="mc-list"></div>
+  <div class="score"><span id="mc-score"></span><button class="btn" id="mc-grade">Grade section</button></div>
+</section>
+
+<!-- ===================== ESSAY ===================== -->
+<section id="p-es" role="tabpanel" hidden>
+  <div class="sec-intro"><p>Written on the exam itself. Answer on paper or in the box (drafts stay in this browser), then check yourself against the grading points and model answer. Diagram questions are meant to be drawn by hand.</p></div>
+  <div class="filter"><label for="es-topic">Topic</label><select id="es-topic"></select></div>
+  <div id="es-list"></div>
+</section>
+
+<!-- ===================== CODE WRITING ===================== -->
+<section id="p-cw" role="tabpanel" hidden>
+  <div class="sec-intro"><p>Handwritten TypeScript, no IDE. Write on paper, or type in the box: it has no autocomplete, spell-check or error highlighting. Then tick off the grading points before you look at the model answer.</p></div>
+  <div class="filter"><label for="cw-topic">Topic</label><select id="cw-topic"></select></div>
+  <div id="cw-list"></div>
+</section>
+
+<footer>Sources: BYU-CS-340/softwaredesign Fall 2026 TTh schedule, the topic pages' linked slide decks, the "User Interface Architecture: MVC, MVP, MVVM" reading, and the Midterm 1 preparation page. Sequence-diagram notes are standard UML, since the slides linked from the Modeling page cover class diagrams.</footer>
+</div>
+
+<script>
+const TOPICS={ts:"TypeScript",tsc:"TS Classes & Interfaces",react:"React Fundamentals",router:"React Router",hooks:"Hooks & State",uml:"UML",arch:"Software Architecture",obs:"Observer",ui:"UI Architecture"};
+
+const CARDS=[
+["ts","Static vs dynamic typing","TypeScript checks types at compile time; JavaScript only finds type errors at runtime and silently converts values."],
+["ts","Type inference","When you omit an annotation, TS works out the type from the value: <code>let a = 1</code> is <code>number</code>."],
+["ts","<code>let x = \"hi\"</code> vs <code>const x = \"hi\"</code>","<code>let</code> widens to <code>string</code>. <code>const</code> keeps the literal type <code>\"hi\"</code>."],
+["ts","Union vs intersection","<code>A | B</code>: one of the types. <code>A &amp; B</code>: must have all members of both."],
+["ts","Tuple","Fixed-length array with a type per position, e.g. <code>[string, number]</code>. Must be explicitly annotated."],
+["ts","<code>any</code> vs <code>unknown</code>","<code>any</code> disables checking. <code>unknown</code> accepts anything but must be narrowed (typeof / as) before use."],
+["ts","<code>undefined</code> vs <code>null</code>","<code>undefined</code>: no value yet (uninitialized). <code>null</code>: deliberately points at nothing."],
+["ts","<code>object</code> (lowercase)","Any non-primitive: objects, arrays, tuples, functions."],
+["ts","Structural typing","Types are compatible if their shapes (property names and types) match, regardless of declared names."],
+["ts","Function type syntax","<code>(evt: Event) =&gt; boolean</code>. Parameter names aren't part of the type."],
+["ts","Rest parameter","<code>...nums: number[]</code> collects remaining arguments into an array."],
+["ts","Transpiling","What <code>tsc</code> does: translates TS source into JS source (not bytecode)."],
+["ts","<code>sourceMap: true</code>","Generates maps from JS lines back to TS lines so debuggers can set breakpoints in TS."],
+["ts","Module vs script","A file with a top-level import/export is a module (own scope). Without one it's a script (global scope)."],
+["ts","<code>.d.ts</code> file","Type declarations for a JS library, like a C header. Enables type checking and autocomplete."],
+["ts","Namespace import","<code>import * as people from \"./person\"</code>, then <code>people.getUserInput()</code>."],
+["tsc","Parameter property","<code>constructor(private x: number)</code> declares and assigns field <code>x</code> in one step."],
+["tsc","Default member visibility","<code>public</code>"],
+["tsc","<code>protected</code>","Accessible in the class and its subclasses, not from outside."],
+["tsc","Abstract class","Can't be instantiated; may declare abstract methods (no body) that subclasses must implement."],
+["tsc","How many classes can a class extend? Interfaces implement?","Extend 0 or 1 class. Implement 0 or more interfaces."],
+["tsc","Interface declared twice","The declarations merge. A <code>type</code> declared twice is a duplicate-identifier error."],
+["tsc","Why prefer interface over intersection for extension?","<code>extends</code> reports conflicting member types; an intersection silently creates an unusable member."],
+["tsc","Can <code>instanceof</code> check an interface?","No. Interfaces don't exist at runtime; <code>instanceof</code> only checks class ancestry."],
+["tsc","What can a type alias describe that an interface can't?","Primitives, unions and intersections. Interfaces only describe object shapes."],
+["react","Single-page application","Server sends the app once; JS updates the DOM locally and calls web APIs (JSON) for data."],
+["react","Virtual DOM","React's in-memory copy of the UI; it diffs changes and minimizes real DOM updates."],
+["react","Unidirectional data flow","Data flows parent → child through props, which makes state changes predictable."],
+["react","JSX","HTML-like syntax compiled (by Babel) into <code>React.createElement</code> calls."],
+["react","Single-root rule","A component returns exactly one root element; use a fragment <code>&lt;&gt;&lt;/&gt;</code> to avoid a wrapper div."],
+["react","Props","Read-only inputs a parent passes to a child, typed with an interface."],
+["react","If-without-else in JSX","<code>{cond &amp;&amp; &lt;Thing /&gt;}</code>"],
+["router","<code>BrowserRouter</code> / <code>Routes</code> / <code>Route</code>","Router used once at the root / container of routes / one path → element mapping."],
+["router","Layout route","A <code>Route</code> with no path; its children render inside the layout's <code>&lt;Outlet /&gt;</code>."],
+["router","<code>:userId</code> vs <code>:userId?</code> vs <code>*</code>","Dynamic segment / optional segment / splat (match anything after)."],
+["router","<code>&lt;Navigate&gt;</code> vs <code>useNavigate()</code>","Component that redirects declaratively vs hook returning a function you call imperatively."],
+["router","<code>Link</code> vs <code>NavLink</code>","Both navigate; NavLink is for navigation bars."],
+["hooks","Hook rules","Name starts with <code>use</code>; call only from functional components or other hooks."],
+["hooks","<code>useState</code>","Returns <code>[value, setValue]</code>. Value persists across renders; setting it triggers a re-render."],
+["hooks","Why use the functional updater?","<code>setX(prev =&gt; …)</code> always gets the latest state, avoiding stale values."],
+["hooks","<code>useRef</code>","Persists a value across renders without causing re-renders."],
+["hooks","<code>useEffect</code> with no array / <code>[]</code> / <code>[a]</code>","After every render / first render only / first render and whenever <code>a</code> changes."],
+["hooks","<code>useCallback</code>","Memoizes a function so its reference stays the same between renders."],
+["hooks","<code>useMemo</code>","Memoizes a computed value (often an object)."],
+["hooks","<code>useContext</code>","Reads shared state from the nearest Provider; subscribers re-render when the value changes."],
+["hooks","Three steps to create a context","1) <code>createContext</code> 2) write a Provider component 3) wrap it around the components that need it."],
+["hooks","<code>useParams</code> / <code>useSearchParams</code>","Path parameters like <code>:displayedUser</code> / query string <code>?page=2</code>."],
+["hooks","Why write custom hooks?","Reuse, abstraction, separation of concerns, testability, sharing across projects."],
+["uml","Model","An abstraction of a system from a particular viewpoint and level of detail."],
+["uml","Three ways to use UML","Sketch (agile), blueprint (big design up front), programming language (code generation)."],
+["uml","<code>+ - # ~</code>","public, private, protected, package. Underlined = static; <code>/</code> = derived."],
+["uml","Aggregation","Hollow diamond at the whole: \"part of\"."],
+["uml","Composition","Filled diamond at the whole: the part can't exist without the whole."],
+["uml","Generalization","Solid line with hollow triangle pointing to the parent: is-a / inheritance."],
+["uml","Dependency","Dashed arrow: one element uses another."],
+["uml","Association class","A class attached to an association by a dashed line, holding attributes of the relationship."],
+["uml","Directed association","Arrowhead shows one-way navigability; use only at design level."],
+["uml","Lifeline","Dashed vertical line below a participant in a sequence diagram; time flows down."],
+["uml","Sync call vs return (sequence)","Solid line, filled arrowhead / dashed line back to the caller."],
+["arch","Software architecture","Large-scale organization of a system into subsystems, packages and layers, their responsibilities, interfaces and communication."],
+["arch","Layer vs subsystem","Layer: horizontal, one level of abstraction. Subsystem: vertical slice of related functionality."],
+["arch","Layer vs tier","Layer is logical; tier is physical (separate machine or process)."],
+["arch","Layering dependency rule","Higher layers depend on lower layers, never the reverse."],
+["arch","Strict vs relaxed layering","Strict: only the layer directly below. Relaxed: any lower layer."],
+["arch","Coupling vs cohesion","Coupling: dependence between elements (keep low). Cohesion: relatedness within an element (keep high)."],
+["arch","Error handling across layers","Map lower-level errors into your layer's abstraction; don't let low-level errors leak upward."],
+["arch","Package diagram dependency","Dashed arrow pointing toward the package depended on (downward in a layered design)."],
+["obs","Observer intent","Notify dependent objects automatically when a subject's state changes."],
+["obs","Observer participants","Subject (attach, detach, notify) and Observer interface (update); concrete subjects and observers."],
+["obs","Observer consequences","Flexible add/remove, loose coupling (dependency inversion), broadcast; but updates can be unexpectedly expensive."],
+["obs","Push vs pull Observer","Push: subject sends changed data in update(). Pull: observer queries the subject after notification."],
+["ui","Two separation principles","Model separate from UI; within UI, display code separate from input-processing code."],
+["ui","Why separate display from input code?","Display code is hard to test automatically; input code is easy, so splitting them maximizes tested code."],
+["ui","MVC: who queries the Model for display?","The View."],
+["ui","MVP: who queries the Model for display?","The Presenter, which pushes data into a passive View."],
+["ui","MVVM: how do View and ViewModel talk?","Data binding: property bindings and method bindings, managed by a framework."],
+["ui","Who observes the Model in MVC / MVP / MVVM?","View / Presenter / ViewModel."],
+["ui","Why does the MVP View interface have setters?","Because the Presenter tells the View what to display."],
+["ui","Implementing a View interface in a React function component","Build a listener object typed as the View interface from state setters, pass it to the Presenter, keep the Presenter in <code>useRef</code>."]
+];
+
+const DATA={"TF": [{"t": "ts", "q": "TypeScript adds runtime type checking to JavaScript programs.", "a": false, "w": "Checking happens at compile time. Types are erased from the JavaScript that runs."}, {"t": "ts", "q": "Type annotations are required on every variable declaration.", "a": false, "w": "They're optional; TypeScript infers the type when you leave one off."}, {"t": "ts", "q": "The array literal <code>[\"a\", 1]<\/code> is inferred as a tuple type.", "a": false, "w": "Array literals infer arrays, here <code>(string | number)[]<\/code>. Tuples must be annotated."}, {"t": "ts", "q": "<code>const arr = [1, 2]; arr.push(3);<\/code> is a compile error.", "a": false, "w": "<code>const<\/code> blocks reassignment, not mutation. A <code>readonly number[]<\/code> would block <code>push<\/code>."}, {"t": "ts", "q": "You can call methods on a value of type <code>unknown<\/code> without first narrowing its type.", "a": false, "w": "That's the difference from <code>any<\/code>: <code>unknown<\/code> must be narrowed with typeof or an assertion first."}, {"t": "ts", "q": "Numeric enum members are numbered starting at 0 unless you assign values.", "a": true, "w": "Values are inferred starting at 0."}, {"t": "ts", "q": "<code>tsc<\/code> is called a transpiler because it produces JavaScript source code rather than bytecode.", "a": true, "w": "Source-to-source translation is transpiling."}, {"t": "ts", "q": "A file with no top-level import or export is treated as a module with its own scope.", "a": false, "w": "It's a script; its declarations are global. Any top-level import/export makes it a module."}, {"t": "ts", "q": "Two object types with the same property names and types are compatible even if they have different names.", "a": true, "w": "Structural typing compares shapes, not names."}, {"t": "tsc", "q": "Class members are private by default in TypeScript.", "a": false, "w": "The default is <code>public<\/code>."}, {"t": "tsc", "q": "A TypeScript class can extend more than one class.", "a": false, "w": "Single inheritance: extend zero or one class, implement any number of interfaces."}, {"t": "tsc", "q": "Declaring the same interface name twice merges the two declarations.", "a": true, "w": "Declaration merging. Doing this with a type alias gives a duplicate identifier error."}, {"t": "tsc", "q": "<code>instanceof<\/code> can test whether an object implements an interface.", "a": false, "w": "Interfaces don't exist at runtime; instanceof checks class ancestry only."}, {"t": "tsc", "q": "An abstract method must have a body in the abstract class.", "a": false, "w": "Abstract methods have no body; subclasses provide it."}, {"t": "react", "q": "In a single-page application, every user action loads a new HTML page from the server.", "a": false, "w": "That's the traditional model. An SPA loads once and updates the DOM with JavaScript."}, {"t": "react", "q": "A React component can return two sibling elements without any wrapper or fragment.", "a": false, "w": "A component must return one root; a fragment avoids an extra DOM element."}, {"t": "react", "q": "In React, data flows from parent to child components through props.", "a": true, "w": "Unidirectional data flow."}, {"t": "react", "q": "JSX is converted into <code>React.createElement<\/code> calls before it runs.", "a": true, "w": "A transpiler such as Babel does this."}, {"t": "router", "q": "<code>BrowserRouter<\/code> should appear once, near the root of the component tree.", "a": true, "w": "Routes and router hooks must sit inside it."}, {"t": "router", "q": "A layout route has a <code>path<\/code> but no <code>element<\/code>.", "a": false, "w": "The reverse: it has an element and no path, and its children render in an <code>Outlet<\/code>."}, {"t": "router", "q": "<code>&lt;Route path=\"*\" ...&gt;<\/code> matches any URL that no other route matches.", "a": true, "w": "It's the catch-all default route."}, {"t": "hooks", "q": "Changing the value stored in a <code>useRef<\/code> causes the component to re-render.", "a": false, "w": "useRef persists values without re-rendering. useState re-renders."}, {"t": "hooks", "q": "<code>useEffect<\/code> with an empty dependency array runs after every render.", "a": false, "w": "Empty array means the initial render only. Omitting the array means every render."}, {"t": "hooks", "q": "Hooks can be called from ordinary utility functions that aren't components or hooks.", "a": false, "w": "Only from functional components or other hooks."}, {"t": "hooks", "q": "<code>useMemo<\/code> returns a memoized value and <code>useCallback<\/code> returns a memoized function.", "a": true, "w": "Tweeter combines them: useCallback functions grouped into a useMemo object."}, {"t": "hooks", "q": "When a context's value changes, every component that reads it with <code>useContext<\/code> re-renders.", "a": true, "w": "Context uses a publish/subscribe model."}, {"t": "uml", "q": "Composition is drawn with a hollow diamond.", "a": false, "w": "Composition is a filled diamond; aggregation is hollow."}, {"t": "uml", "q": "According to the slides, implementation details are best expressed in UML rather than in code.", "a": false, "w": "Implementation should be done in code, not UML."}, {"t": "uml", "q": "If an attribute's multiplicity is omitted, it is assumed to be 1.", "a": true, "w": "Stated on the design-level class slide."}, {"t": "uml", "q": "A sequence diagram is a structural UML diagram.", "a": false, "w": "It's behavioral, along with use case, state, activity and communication diagrams."}, {"t": "uml", "q": "A generalization arrow has a hollow (unfilled) triangular head pointing to the parent class.", "a": true, "w": "The slides correct an example that used a filled head."}, {"t": "arch", "q": "In a layered architecture, a lower layer may call a higher layer to request services.", "a": false, "w": "Dependencies point downward only."}, {"t": "arch", "q": "In a strict layered architecture, a layer may depend only on the layer directly below it.", "a": true, "w": "Relaxed layering allows any lower layer."}, {"t": "arch", "q": "Lower layers tend to be more general and reusable than higher layers.", "a": true, "w": "The domain model and libraries are reused; the UI is application-specific."}, {"t": "arch", "q": "Layering tends to reduce coupling and increase cohesion.", "a": true, "w": "Both are listed benefits."}, {"t": "arch", "q": "\"Layer\" and \"tier\" mean the same thing.", "a": false, "w": "A layer is logical; a tier is a physical machine or process."}, {"t": "obs", "q": "In the Observer pattern, the Subject depends on the concrete observer classes.", "a": false, "w": "It depends only on the Observer interface, which is why observers can be added freely."}, {"t": "obs", "q": "Observer supports broadcast communication from one subject to many observers.", "a": true, "w": "Listed as a consequence of the pattern."}, {"t": "ui", "q": "In MVP, the View queries the Model directly for the data it displays.", "a": false, "w": "The Presenter queries the Model and pushes data into the View."}, {"t": "ui", "q": "In MVC, the View registers as an observer of the Model.", "a": true, "w": "In MVP the Presenter observes; in MVVM the ViewModel does."}, {"t": "ui", "q": "In MVVM, the View and ViewModel communicate through data binding rather than method calls.", "a": true, "w": "Property bindings and method bindings."}, {"t": "ui", "q": "Display code is generally easier to test automatically than input-processing code.", "a": false, "w": "The opposite, which is why logic is moved out of the View."}], "MC": [{"t": "ts", "q": "What does <code>const greeting = \"howdy\"<\/code> infer as its type?", "o": ["string", "\"howdy\" (a literal type)", "any", "unknown"], "a": 1, "w": "const keeps the narrow literal type; let would widen to string."}, {"t": "ts", "q": "Which is true of <code>unknown<\/code>?", "o": ["It disables type checking like any", "You must narrow it before calling methods on it", "It only holds null or undefined", "It's the same as object"], "a": 1, "w": "unknown is the type-safe counterpart of any: you narrow with typeof or an assertion first."}, {"t": "ts", "q": "<code>let t = [\"a\", 1]<\/code> infers which type?", "o": ["[string, number]", "(string | number)[]", "any[]", "object"], "a": 1, "w": "Array literals infer arrays, never tuples. Tuples must be annotated."}, {"t": "ts", "q": "A value of type <code>Cat &amp; Dog<\/code> must…", "o": ["be either a Cat or a Dog", "have all properties of both Cat and Dog", "have only the shared properties", "be an instance of both classes"], "a": 1, "w": "Intersection requires every member of both types."}, {"t": "ts", "q": "TypeScript's type compatibility is based on…", "o": ["declared class names", "shape (property names and types)", "prototype chains", "the file the type was declared in"], "a": 1, "w": "Structural typing."}, {"t": "ts", "q": "What makes a TypeScript file a module rather than a script?", "o": ["It ends in .tsx", "It has a top-level import or export", "It is listed in tsconfig files", "It declares a class"], "a": 1, "w": "Without a top-level import or export, its declarations are in global scope."}, {"t": "ts", "q": "What is the purpose of a <code>.d.ts<\/code> file?", "o": ["Holds compiled JavaScript", "Supplies type information for JavaScript code", "Configures the compiler", "Stores test data"], "a": 1, "w": "Declaration files are like C headers for JS libraries."}, {"t": "tsc", "q": "What does <code>constructor(private name: string) {}<\/code> do?", "o": ["Nothing; it's a syntax error", "Declares a private field name and assigns the argument to it", "Makes the constructor private", "Creates a static field"], "a": 1, "w": "That's a parameter property."}, {"t": "tsc", "q": "What happens if you declare <code>interface User<\/code> twice with different members?", "o": ["Compile error", "The second replaces the first", "The declarations merge", "Only the first is used"], "a": 2, "w": "Declaration merging. Doing the same with type gives a duplicate identifier error."}, {"t": "tsc", "q": "Which can an interface NOT describe?", "o": ["An object with methods", "A union of string literals", "An object with optional properties", "An object with readonly properties"], "a": 1, "w": "Use a type alias for unions, intersections and primitives."}, {"t": "tsc", "q": "Why can't <code>instanceof<\/code> test whether an object implements an interface?", "o": ["Interfaces are private", "Interfaces don't exist at runtime", "instanceof only works on primitives", "It can, with a cast"], "a": 1, "w": "Interfaces are erased during compilation."}, {"t": "tsc", "q": "A class in TypeScript can…", "o": ["extend many classes", "extend one class and implement many interfaces", "implement only one interface", "not extend abstract classes"], "a": 1, "w": "Single inheritance, multiple interfaces."}, {"t": "react", "q": "In a traditional (non-SPA) web app, a user action typically…", "o": ["updates the DOM locally with JS", "sends a request and receives a whole new HTML page", "calls a JSON API", "re-renders one component"], "a": 1, "w": "That's the main contrast with SPAs."}, {"t": "react", "q": "JSX is converted into…", "o": ["HTML strings on the server", "React.createElement calls", "Web Components", "CSS"], "a": 1, "w": "A transpiler like Babel performs the conversion."}, {"t": "react", "q": "Why use a fragment <code>&lt;&gt;…&lt;/&gt;<\/code>?", "o": ["To apply styles", "To return one root without adding an extra DOM element", "To lazy-load a component", "To declare state"], "a": 1, "w": "Components must return a single root element."}, {"t": "react", "q": "Which renders <code>&lt;Banner /&gt;<\/code> only when <code>show<\/code> is true, with no else?", "o": ["{show ? <Banner />}", "{show && <Banner />}", "{if (show) <Banner />}", "{show || <Banner />}"], "a": 1, "w": "Short-circuit && is the standard if-only pattern."}, {"t": "router", "q": "A <code>Route<\/code> with an <code>element<\/code> but no <code>path<\/code> is a…", "o": ["catch-all route", "index route", "layout route", "dynamic route"], "a": 2, "w": "Its children render inside the layout's Outlet."}, {"t": "router", "q": "Which path matches <code>/user<\/code> AND <code>/user/42<\/code>?", "o": ["/user/:id", "/user/:id?", "/user", "/:id"], "a": 1, "w": "The ? makes the segment optional."}, {"t": "router", "q": "Difference between <code>&lt;Navigate to=\"/x\"/&gt;<\/code> and <code>navigate(\"/x\")<\/code>?", "o": ["None", "Navigate is a component used in JSX; navigate is a function from useNavigate called in code", "navigate only works outside BrowserRouter", "Navigate reloads the page"], "a": 1, "w": "Declarative vs imperative."}, {"t": "hooks", "q": "Which hook remembers a value across renders WITHOUT triggering a re-render when it changes?", "o": ["useState", "useRef", "useEffect", "useContext"], "a": 1, "w": "useState re-renders; useRef doesn't."}, {"t": "hooks", "q": "<code>useEffect(fn, [])<\/code> runs…", "o": ["after every render", "only after the first render", "never", "before the first render"], "a": 1, "w": "An empty dependency array means initial render only."}, {"t": "hooks", "q": "<code>useEffect(fn)<\/code> with no second argument runs…", "o": ["only once", "after every render", "only when props change", "only on unmount"], "a": 1, "w": "No dependency array means every render."}, {"t": "hooks", "q": "<code>useCallback<\/code> memoizes a ___ and <code>useMemo<\/code> memoizes a ___.", "o": ["value, function", "function, value", "component, hook", "state, ref"], "a": 1, "w": "Tweeter uses both: functions via useCallback grouped into a useMemo object."}, {"t": "hooks", "q": "Why prefer <code>setItems(prev =&gt; [...prev, ...more])<\/code> over <code>setItems([...items, ...more])<\/code>?", "o": ["It's shorter", "It always uses the latest state, avoiding stale closures", "It skips re-rendering", "It's required by TypeScript"], "a": 1, "w": "The functional form receives the current value."}, {"t": "hooks", "q": "Where may hooks be called?", "o": ["Anywhere", "Only in class components", "Only in functional components or other hooks", "Only in useEffect"], "a": 2, "w": "That's one of the hook rules, along with the use prefix."}, {"t": "hooks", "q": "<code>useContext<\/code> uses which model to update components?", "o": ["Polling", "Publish/subscribe", "Two-way binding", "Inheritance"], "a": 1, "w": "When the provider's value changes, every subscribed component re-renders."}, {"t": "uml", "q": "A filled diamond at the Car end of a Car–Wheel line means…", "o": ["aggregation", "composition", "generalization", "dependency"], "a": 1, "w": "Composition: the part's lifetime is tied to the whole."}, {"t": "uml", "q": "What does <code>#<\/code> mean before an attribute?", "o": ["public", "private", "protected", "static"], "a": 2, "w": "+ public, - private, # protected, ~ package."}, {"t": "uml", "q": "Which UML diagram is behavioral?", "o": ["Class", "Package", "Sequence", "Deployment"], "a": 2, "w": "Sequence, use case, state, activity and communication are behavioral."}, {"t": "uml", "q": "Using UML informally on a whiteboard to discuss ideas is called using it as a…", "o": ["blueprint", "sketch", "programming language", "specification"], "a": 1, "w": "Sketch mode fits agile development."}, {"t": "uml", "q": "A dashed arrow between two classes shows…", "o": ["inheritance", "dependency", "composition", "an association class"], "a": 1, "w": "Accountant ⇢ Calculator."}, {"t": "uml", "q": "In a sequence diagram, a dashed line with an arrow back to the caller is a…", "o": ["synchronous call", "return", "object creation", "asynchronous message"], "a": 1, "w": "Calls are solid; returns are dashed."}, {"t": "arch", "q": "In a layered architecture, which dependency is NOT allowed?", "o": ["UI → business logic", "business logic → domain model", "domain model → UI", "business logic → database library"], "a": 2, "w": "Lower layers never depend on higher layers."}, {"t": "arch", "q": "A layer that can call any layer below it (not just the next one) is part of a ___ architecture.", "o": ["strict", "relaxed", "hexagonal", "tiered"], "a": 1, "w": "Relaxed layering is common in business systems."}, {"t": "arch", "q": "Which is a drawback of layering?", "o": ["Higher coupling", "Overhead from crossing layer boundaries", "Lower cohesion", "Can't reuse lower layers"], "a": 1, "w": "Efficiency is the classic cost."}, {"t": "arch", "q": "A layer catches a SQL exception and throws a 'UserNotFound' error. This is…", "o": ["leaking errors", "mapping errors to the layer's level of abstraction", "a strict-layering violation", "an Observer"], "a": 1, "w": "Low-level errors shouldn't leak upward."}, {"t": "arch", "q": "Layer vs tier: a tier is…", "o": ["a logical grouping", "a physical deployment unit (machine/process)", "a package", "a subsystem"], "a": 1, "w": "Layers are logical; tiers are physical."}, {"t": "obs", "q": "In Observer, who calls <code>update()<\/code>?", "o": ["The client", "The Subject, inside notify()", "Each Observer on itself", "The constructor"], "a": 1, "w": "notify() loops over observers and calls update on each."}, {"t": "obs", "q": "Which is a listed consequence of Observer?", "o": ["Tight coupling between subject and observers", "Observers can't be removed at runtime", "A small change can trigger unexpectedly expensive updates", "It requires inheritance from the observer"], "a": 2, "w": "The others are the opposite of what the pattern provides."}, {"t": "obs", "q": "Observer's subject depends on the Observer interface rather than concrete observers. This is an example of…", "o": ["dependency inversion", "composition", "template method", "tight coupling"], "a": 0, "w": "The slides call this out explicitly."}, {"t": "ui", "q": "In MVC, who observes the Model?", "o": ["Controller", "View", "Presenter", "Nobody"], "a": 1, "w": "In MVP it's the Presenter; in MVVM the ViewModel."}, {"t": "ui", "q": "Main advantage of MVP over MVC?", "o": ["Fewer classes", "More logic moves out of the hard-to-test View into the testable Presenter", "No need for an Observer", "Views can query the Model directly"], "a": 1, "w": "The View becomes passive and loses its Model dependency."}, {"t": "ui", "q": "MVVM differs from MVP mainly in that…", "o": ["the ViewModel doesn't talk to the Model", "View and ViewModel communicate by data binding instead of method calls", "there is no View", "the View observes the Model"], "a": 1, "w": "Property bindings and method bindings replace the calls."}, {"t": "ui", "q": "Why does the MVP View interface include setters like <code>setName()<\/code>?", "o": ["For data binding", "Because the Presenter pushes data into the View", "Because the View observes the Model", "They are optional getters"], "a": 1, "w": "In MVC the View fetches its own data, so it only needed getters."}, {"t": "ui", "q": "In Tweeter, why is the Presenter stored in <code>useRef<\/code>?", "o": ["To trigger re-renders", "So it's created once instead of on every render", "To share it via context", "Because presenters can't be in state"], "a": 1, "w": "useRef persists across renders without re-rendering."}, {"t": "ts", "q": "Which <code>tsconfig.json<\/code> setting tells <code>tsc<\/code> where your source files live?", "o": ["outDir", "target", "include", "sourceMap"], "a": 2, "w": "The project sets <code>\"include\": [\"src\"]<\/code>; outDir is where the JS goes."}, {"t": "tsc", "q": "Which modifier lets subclasses use a member but hides it from outside code?", "o": ["public", "private", "protected", "readonly"], "a": 2, "w": "private hides it from subclasses too."}, {"t": "react", "q": "In a Vite React + TypeScript project, which file is the root of the React component tree?", "o": ["index.html", "vite.config.ts", "src/App.tsx", "package.json"], "a": 2, "w": "index.html is the host page and main.tsx initializes, but App.tsx is where the tree starts."}, {"t": "uml", "q": "Multiplicity <code>2..4<\/code> on the Wheel end of a Car–Wheel association means…", "o": ["each wheel belongs to 2 to 4 cars", "each car has 2 to 4 wheels", "there are 2 cars and 4 wheels", "wheels are optional"], "a": 1, "w": "Read from the other end: one Car relates to 2..4 Wheels."}, {"t": "arch", "q": "Which UML diagram shows the logical architecture as nested packages with dependency arrows?", "o": ["Sequence diagram", "Package diagram", "Object diagram", "State diagram"], "a": 1, "w": "Package diagrams map to Java packages or .NET namespaces."}, {"t": "ui", "q": "Which pattern lets non-programmer UI designers build views in declarative markup?", "o": ["MVC", "MVP", "MVVM", "Observer"], "a": 2, "w": "Data binding means the View needs little or no code."}], "ES": [{"t": "ui", "q": "How is MVP structurally different from MVC? What are the advantages and disadvantages of that difference?", "r": ["Says who queries the Model in each (View in MVC, Presenter in MVP)", "Says who observes the Model in each", "Notes the MVP View is passive and has no Model dependency", "Advantage: more testable logic in the Presenter", "Disadvantage: bigger View interface / more glue code"], "m": "<p>In MVC the View queries the Model for data and observes it. In MVP the Presenter queries the Model, observes it, and pushes data into the View through setter methods; the View no longer references the Model.<\/p><p><b>Advantages:<\/b> the View is passive and thin. Logic moves to the Presenter, which doesn't depend on the UI framework, so it's easy to unit test by mocking the View interface. Model changes affect fewer classes.<\/p><p><b>Disadvantages:<\/b> the View interface grows (setters plus getters), the Presenter carries more code, and there's more glue code between View and Presenter.<\/p>"}, {"t": "ui", "q": "How is MVVM structurally different from MVP? What are the advantages and disadvantages of that difference?", "r": ["ViewModel replaces Presenter; its properties/methods model the view", "Data binding (property and method bindings) replaces method calls", "View written declaratively", "Advantage: less glue code, designers can build views", "Disadvantage: needs a binding framework; harder to trace/debug"], "m": "<p>MVVM replaces the Presenter with a ViewModel whose properties model the view's data and UI state and whose methods model user actions. The View is declared in markup and connected by data binding instead of method calls; the framework keeps both sides in sync.<\/p><p><b>Advantages:<\/b> far less glue code, designers who aren't programmers can build views, and the ViewModel stays testable without a UI.<\/p><p><b>Disadvantages:<\/b> depends on a binding framework, implicit data flow is harder to trace and debug, and many bindings can cost performance.<\/p>"}, {"t": "ui", "q": "Why should Model code be kept separate from UI code, and why should display code be kept separate from input-processing code?", "r": ["Understandable (SRP)", "Maintainable: they change for different reasons", "Reusable: one Model, many UIs", "Teams can work independently", "Display code is hard to test; input code is easy, so separating maximizes tested code"], "m": "<p>Separating Model from UI makes the code more understandable and maintainable, since the two change at different times for different reasons (SRP). The Model can be reused by several UIs (web, mobile, teller vs. customer), and separate teams can work without interfering.<\/p><p>Inside the UI, display code is hard to test automatically while input-processing code is easy to test. Putting them in separate classes (view vs. controller/presenter) maximizes the code covered by automated tests, with the same understandability benefits.<\/p>"}, {"t": "arch", "q": "What is software architecture? Name four benefits of organizing software into layers, and explain how layering relates to dependencies.", "r": ["Definition: large-scale organization into subsystems/packages/layers, responsibilities, interfaces, communication", "Four benefits (e.g., separation of concerns, low coupling, high cohesion, reuse, replaceability, parallel teams, distribution)", "Higher layers depend on lower, never the reverse", "Mentions strict vs relaxed"], "m": "<p>Software architecture is the large-scale organization of a system into subsystems, packages and layers: the major parts, their responsibilities, interfaces, dependencies and communication, plus technology and deployment choices.<\/p><p><b>Benefits:<\/b> separation of concerns; reduced coupling; increased cohesion; reusable lower layers; replaceable layers; parallel team development; layers can be distributed to different servers.<\/p><p><b>Dependencies:<\/b> higher layers depend on lower layers, never the reverse. Strict layering allows only the layer directly below; relaxed allows any lower layer. A change ripples only into layers that depend on the changed one.<\/p>"}, {"t": "arch", "q": "Assign each class to a layer and draw a UML package diagram: <code>LoginComponent<\/code> (React), <code>LoginPresenter<\/code>, <code>UserService<\/code>, <code>User<\/code>, <code>AuthToken<\/code>, <code>ServerFacade<\/code> (makes HTTP calls).", "r": ["UI/View layer: LoginComponent", "Presenter layer: LoginPresenter", "Service/business layer: UserService", "Network/communication: ServerFacade", "Domain model: User, AuthToken", "Dashed dependency arrows point downward only"], "m": "<p>Packages, top to bottom, each a tabbed folder box:<\/p><ul><li><b>view<\/b>: LoginComponent<\/li><li><b>presenter<\/b>: LoginPresenter<\/li><li><b>model.service<\/b>: UserService<\/li><li><b>network<\/b>: ServerFacade<\/li><li><b>model.domain<\/b> (shared): User, AuthToken<\/li><\/ul><p>Dashed arrows: view ⇢ presenter ⇢ service ⇢ network, and each of those ⇢ domain. No arrow ever points up (the Presenter talks back to the view through a View interface it owns, not a dependency on the component).<\/p>"}, {"t": "hooks", "q": "Explain what each hook is for: useState, useRef, useEffect, useMemo, useCallback, useContext. Then explain how the dependency array works.", "r": ["useState: persists + re-renders", "useRef: persists without re-render", "useEffect: side effects after render", "useMemo value vs useCallback function", "useContext: shared state without prop drilling", "Dependency array: omitted / [] / [a,b]"], "m": "<ul><li><b>useState<\/b>: state that persists across renders and re-renders when set.<\/li><li><b>useRef<\/b>: persists a value without re-rendering (e.g., hold a Presenter).<\/li><li><b>useEffect<\/b>: side effects after render (load data, subscribe).<\/li><li><b>useMemo<\/b>: cache a computed value.<\/li><li><b>useCallback<\/b>: cache a function reference.<\/li><li><b>useContext<\/b>: read shared state from a Provider without prop drilling.<\/li><\/ul><p><b>Dependency array:<\/b> omitted → every render; <code>[]<\/code> → first render only; <code>[a,b]<\/code> → first render and whenever a or b changes.<\/p>"}, {"t": "react", "q": "Compare a traditional web application with a single-page application. Why does React use a virtual DOM?", "r": ["Traditional: full page per request; server load, latency", "SPA: loads once, JS updates DOM, fetches JSON", "Virtual DOM: diff to minimize expensive real DOM updates"], "m": "<p>Traditional: every action is an HTTP request returning a full HTML page, so the server is loaded, the browser sits idle, and latency makes the UI sluggish. SPA: the app loads once; JS updates the DOM locally and fetches only data (JSON) from APIs.<\/p><p>The virtual DOM lets React compute what changed after a state or prop update and apply the minimum real DOM changes, which are expensive.<\/p>"}, {"t": "tsc", "q": "When would you choose an interface instead of a type alias? Give two concrete technical differences.", "r": ["Interfaces: object shapes only; aliases also unions/primitives", "extends reports conflicts; intersection hides them", "Interfaces merge; duplicate types error", "Sensible guidance on when to use each"], "m": "<ul><li>Interfaces only describe object shapes; aliases can name unions, intersections and primitives.<\/li><li>Extending an interface with a conflicting member is a compile error; an intersection silently creates an unusable member, so interfaces check more strictly.<\/li><li>Same-named interfaces merge; duplicate aliases are an error.<\/li><\/ul><p>Use interfaces for object contracts classes implement (a View interface for a Presenter); use aliases for unions like <code>type Color = 'Black' | 'White'<\/code>.<\/p>"}, {"t": "ts", "q": "Explain structural typing. Give an example where two unrelated classes are interchangeable, and say how private members change this.", "r": ["Compatibility by shape, not name", "Concrete example with two classes or an object literal", "Private/protected members must come from the same declaration"], "m": "<p>TypeScript decides compatibility by shape: if a value has all the required members with compatible types, it fits, whatever it's called.<\/p><pre><code>class Zebra { trot() {} }\nclass Poodle { trot() {} }\nfunction ride(z: Zebra) { z.trot(); }\nride(new Poodle());       // OK: same shape\nride({ trot() {} });      // OK too<\/code><\/pre><p>If a class has a <code>private<\/code> or <code>protected<\/code> member, another type is only compatible if that member comes from the same declaration (e.g., a subclass), so look-alike classes stop matching.<\/p>"}, {"t": "obs", "q": "Describe the Observer pattern: its intent, its structure, two consequences, and where it shows up in UI architecture.", "r": ["Intent: notify dependents when subject changes", "Structure: Subject (attach/detach/notify), Observer interface (update), concrete classes", "Two consequences (loose coupling/dependency inversion, broadcast, add/remove at runtime, unexpected update cost)", "Use: Model notifies Views (MVC) / Presenters (MVP) / ViewModels (MVVM)"], "m": "<p><b>Intent:<\/b> when a subject changes state, every dependent object is notified automatically.<\/p><p><b>Structure:<\/b> a Subject keeps a list of Observers with attach/detach and calls <code>notify()<\/code>, which calls <code>update()<\/code> on each. Observers implement an Observer interface; concrete subjects and observers fill in the details.<\/p><p><b>Consequences:<\/b> observers can be added or removed at runtime; the subject depends only on an interface (dependency inversion); broadcast communication; but one change can trigger an unexpectedly expensive cascade.<\/p><p><b>UI architecture:<\/b> the Model is the subject. In MVC Views observe it, in MVP Presenters, in MVVM ViewModels, so all displayed copies of the data stay in sync.<\/p>"}, {"t": "uml", "q": "Draw a class diagram: a Library has many Books. Each Book is composed of one or more Chapters that can't exist without it. A Member is a kind of Person and can borrow up to 5 books. Show a private <code>isbn: string<\/code> and a public <code>checkOut()<\/code> on Book.", "r": ["Library 1 — * Book (association or aggregation)", "Filled diamond at Book, 1..* Chapter", "Generalization: hollow triangle Member → Person", "Member — 0..5 Book, named 'borrows'", "- isbn : string and + checkOut()"], "m": "<ul><li><b>Library<\/b> 1 —— * <b>Book<\/b> (plain association or hollow diamond at Library).<\/li><li><b>Book<\/b> ◆—— 1..* <b>Chapter<\/b>: filled diamond at Book.<\/li><li><b>Member<\/b> —▷ <b>Person<\/b>: solid line, hollow triangle at Person.<\/li><li><b>Member<\/b> 0..1 —— 0..5 <b>Book<\/b>, named \"borrows\".<\/li><li>Book box: <code>- isbn : string<\/code> and <code>+ checkOut()<\/code>.<\/li><\/ul>"}, {"t": "uml", "q": "Draw a sequence diagram: the user clicks Login; LoginComponent calls <code>presenter.doLogin(alias, pw)<\/code>; the presenter calls <code>UserService.login()<\/code>, which returns a User; on success the presenter calls <code>view.navigate()<\/code>, otherwise <code>view.displayErrorMessage()<\/code>.", "r": ["Three participants with dashed lifelines", "Solid arrows for calls, dashed for the return", "Activation bars", "alt frame for success vs failure"], "m": "<p>Participants: <b>:LoginComponent<\/b>, <b>:LoginPresenter<\/b>, <b>:UserService<\/b>.<\/p><ol><li>Component → Presenter: <code>doLogin(alias, pw)<\/code> (solid, activation on Presenter).<\/li><li>Presenter → UserService: <code>login(alias, pw)<\/code>.<\/li><li>UserService ⇠ Presenter: <code>user<\/code> (dashed return).<\/li><li><code>alt<\/code> frame: [success] Presenter → Component <code>navigate(\"/feed/…\")<\/code>; [else] Presenter → Component <code>displayErrorMessage(msg)<\/code>.<\/li><\/ol>"}, {"t": "uml", "q": "Contrast a conceptual-level class diagram with an implementation (design)-level class diagram of the same domain.", "r": ["Conceptual: understand the problem; classes = sets of real-world things", "Design: classes = types with visibility, types, methods, navigability", "Example of what appears in one but not the other"], "m": "<p>A <b>conceptual<\/b> diagram models the problem domain: classes are sets of real things (Mother, Child), with names, key attributes and named associations, usually no methods, types or visibility.<\/p><p>A <b>design/implementation<\/b> diagram models the software: classes are types, with <code>+/-/#<\/code> visibility, attribute types and multiplicities, methods, directed associations, interfaces and dependencies. For example a conceptual \"Mother has Child\" becomes <code>Mother<\/code> with <code>- children : Child[*]<\/code> and <code>+ addChild(c: Child)<\/code>.<\/p>"}], "CW": [{"t": "obs", "h": "Implement the Observer pattern for a stock price feed.", "q": "<p>Write an <code>Observer<\/code> interface, an abstract <code>Subject<\/code> class with attach / detach / notify, and a <code>StockTicker<\/code> subject with a <code>price<\/code> property that notifies only when the price actually changes. Then write two observers: <code>PriceDisplay<\/code> prints the current price, and <code>ChangeDisplay<\/code> prints the change since the last update. Show the wiring.<\/p>", "r": ["Observer interface with update()", "Subject holds a list; attach, detach, notify", "notify() called from the setter, only when the value changes", "ChangeDisplay remembers the previous price", "Observers attached in client code"], "m": "<pre><code>interface Observer {\n  update(subject: Subject): void;\n}\n\nabstract class Subject {\n  private observers: Observer[] = [];\n  attach(o: Observer): void { this.observers.push(o); }\n  detach(o: Observer): void { this.observers = this.observers.filter(x =&gt; x !== o); }\n  protected notify(): void { this.observers.forEach(o =&gt; o.update(this)); }\n}\n\nclass StockTicker extends Subject {\n  private _price = 0;\n  constructor(public readonly symbol: string) { super(); }\n  get price(): number { return this._price; }\n  set price(value: number) {\n    if (value !== this._price) {\n      this._price = value;\n      this.notify();\n    }\n  }\n}\n\nclass PriceDisplay implements Observer {\n  update(subject: Subject): void {\n    const t = subject as StockTicker;\n    console.log(`${t.symbol}: $${t.price.toFixed(2)}`);\n  }\n}\n\nclass ChangeDisplay implements Observer {\n  private last: number | null = null;\n  update(subject: Subject): void {\n    const t = subject as StockTicker;\n    if (this.last !== null) console.log(`Change: ${(t.price - this.last).toFixed(2)}`);\n    this.last = t.price;\n  }\n}\n\nconst ticker = new StockTicker(&quot;BYU&quot;);\nticker.attach(new PriceDisplay());\nticker.attach(new ChangeDisplay());\nticker.price = 101.5;\nticker.price = 99.25;<\/code><\/pre>"}, {"t": "ts", "h": "Write the event-receiver registry from the TypeScript slides.", "q": "<p>Given <code>interface AppEvent { name: string }<\/code>, write: a function type alias <code>EventReceiver<\/code> (takes an event, returns boolean), a <code>RegistrationId<\/code> alias for number, a registration type pairing an id with a receiver, and three functions:<\/p><ul><li><code>registerReceiver(receiver)<\/code> stores it with a new incrementing id and returns the id<\/li><li><code>notifyReceivers(evt)<\/code> calls every receiver<\/li><li><code>unregisterReceiver(id)<\/code> removes it and returns true, or false if not found<\/li><\/ul>", "r": ["Function type alias written with =>", "Registrations stored in a typed array", "Incrementing id returned", "findIndex + splice; returns boolean", "Return types annotated"], "m": "<pre><code>interface AppEvent { name: string; }\n\ntype EventReceiver = (evt: AppEvent) =&gt; boolean;\ntype RegistrationId = number;\n\ninterface ReceiverRegistration {\n  id: RegistrationId;\n  receiver: EventReceiver;\n}\n\nconst registrations: ReceiverRegistration[] = [];\nlet nextId: RegistrationId = 1;\n\nfunction registerReceiver(receiver: EventReceiver): RegistrationId {\n  const id = nextId++;\n  registrations.push({ id, receiver });\n  return id;\n}\n\nfunction notifyReceivers(evt: AppEvent): void {\n  registrations.forEach(r =&gt; r.receiver(evt));\n}\n\nfunction unregisterReceiver(id: RegistrationId): boolean {\n  const index = registrations.findIndex(r =&gt; r.id === id);\n  if (index === -1) return false;\n  registrations.splice(index, 1);\n  return true;\n}<\/code><\/pre>"}, {"t": "ts", "h": "Types, tuples, and narrowing <code>unknown<\/code>.", "q": "<p>Write:<\/p><ol><li>A type alias <code>Color<\/code> that only allows <code>'Black'<\/code> or <code>'White'<\/code>.<\/li><li>A tuple type <code>Point<\/code> with two required numbers and an optional third.<\/li><li>An interface <code>Product<\/code> with a readonly numeric <code>id<\/code>, a <code>name<\/code>, and an optional <code>price<\/code>.<\/li><li><code>describe(value: unknown): string<\/code> returning <code>\"number: 5\"<\/code>, <code>\"string of length 3\"<\/code>, <code>\"array of 2 items\"<\/code>, or <code>\"something else\"<\/code>.<\/li><li>An arrow function <code>total<\/code> with a default <code>label<\/code> parameter and a rest parameter of numbers that returns e.g. <code>\"Total: 12\"<\/code>.<\/li><\/ol>", "r": ["Union of string literals", "Tuple with optional element ?", "readonly and ? on interface members", "typeof / Array.isArray narrowing before use", "Default param and ...rest: number[]"], "m": "<pre><code>type Color = &#x27;Black&#x27; | &#x27;White&#x27;;\n\ntype Point = [number, number, number?];\n\ninterface Product {\n  readonly id: number;\n  name: string;\n  price?: number;\n}\n\nfunction describe(value: unknown): string {\n  if (typeof value === &#x27;number&#x27;) return `number: ${value}`;\n  if (typeof value === &#x27;string&#x27;) return `string of length ${value.length}`;\n  if (Array.isArray(value)) return `array of ${value.length} items`;\n  return &#x27;something else&#x27;;\n}\n\nconst total = (label: string = &#x27;Total&#x27;, ...nums: number[]): string =&gt;\n  `${label}: ${nums.reduce((sum, n) =&gt; sum + n, 0)}`;\n\n// total(undefined, 5, 7) -&gt; &quot;Total: 12&quot;<\/code><\/pre>"}, {"t": "tsc", "h": "Abstract classes and inheritance: chess pieces.", "q": "<p>Given:<\/p><pre><code>type Color = &#x27;Black&#x27; | &#x27;White&#x27;;\ntype File = &#x27;A&#x27; | &#x27;B&#x27; | &#x27;C&#x27; | &#x27;D&#x27; | &#x27;E&#x27; | &#x27;F&#x27; | &#x27;G&#x27; | &#x27;H&#x27;;\ntype Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;\nclass Position {\n  constructor(readonly file: File, readonly rank: Rank) {}\n  distanceFrom(p: Position): { file: number; rank: number } { /* abs differences */ }\n}<\/code><\/pre><p>Write an abstract class <code>Piece<\/code> with a protected position, a private readonly color (use parameter properties), a protected constructor, a <code>moveTo<\/code> that throws on an illegal move, and an abstract <code>canMoveTo<\/code>. Then write <code>Rook<\/code> (moves along a rank or a file) and <code>Bishop<\/code> (moves diagonally).<\/p>", "r": ["abstract class + abstract method with no body", "Parameter properties with protected / private readonly", "protected constructor; subclasses call super(...)", "moveTo uses canMoveTo and throws", "Correct Rook and Bishop logic (not moving zero squares)"], "m": "<pre><code>abstract class Piece {\n  protected constructor(\n    protected position: Position,\n    private readonly color: Color\n  ) {}\n\n  moveTo(position: Position): void {\n    if (!this.canMoveTo(position)) {\n      throw new Error(&#x27;Illegal move&#x27;);\n    }\n    this.position = position;\n  }\n\n  abstract canMoveTo(position: Position): boolean;\n}\n\nclass Rook extends Piece {\n  constructor(position: Position, color: Color) {\n    super(position, color);\n  }\n  canMoveTo(position: Position): boolean {\n    const d = this.position.distanceFrom(position);\n    // exactly one of the distances is zero\n    return (d.file === 0) !== (d.rank === 0);\n  }\n}\n\nclass Bishop extends Piece {\n  constructor(position: Position, color: Color) {\n    super(position, color);\n  }\n  canMoveTo(position: Position): boolean {\n    const d = this.position.distanceFrom(position);\n    return d.file === d.rank &amp;&amp; d.file &gt; 0;\n  }\n}<\/code><\/pre>"}, {"t": "tsc", "h": "Accessors and parameter properties.", "q": "<p>Write a <code>Person<\/code> class whose constructor takes <code>id<\/code>, <code>name<\/code> and <code>age<\/code>. Use parameter properties so <code>id<\/code> is public and readonly and <code>name<\/code> is public. Store age in a private <code>_age<\/code> field exposed through a getter and a setter; the setter throws an <code>Error<\/code> unless 0 &lt; age &lt; 200. The constructor must go through the setter. Show one line of client code that would be a compile error.<\/p>", "r": ["public readonly / public parameter properties", "private _age backing field", "get / set syntax", "Validation throws Error", "Constructor assigns this.age (uses setter)", "Compile error example: assigning id"], "m": "<pre><code>class Person {\n  private _age = 0;\n\n  constructor(public readonly id: string, public name: string, age: number) {\n    this.age = age;            // goes through the setter\n  }\n\n  get age(): number {\n    return this._age;\n  }\n\n  set age(value: number) {\n    if (value &lt;= 0 || value &gt;= 200) {\n      throw new Error(`Invalid age: ${value}`);\n    }\n    this._age = value;\n  }\n}\n\nconst p = new Person(&#x27;42&#x27;, &#x27;Ada&#x27;, 36);\np.age = 37;          // OK\np.id = &#x27;7&#x27;;          // compile error: id is readonly<\/code><\/pre>"}, {"t": "react", "h": "A typed React component with props and conditional rendering.", "q": "<p>Given <code>interface User { alias: string; firstName: string; lastName: string; imageUrl: string; followerCount: number; }<\/code>, write a <code>UserCard<\/code> arrow-function component with a props interface: <code>user: User | null<\/code>, <code>isSelf: boolean<\/code>, <code>onFollow: (user: User) =&gt; void<\/code>.<\/p><ul><li>Render nothing if <code>user<\/code> is null.<\/li><li>Show the image and full name.<\/li><li>Show \"This is you\" if <code>isSelf<\/code>, otherwise a Follow button that calls <code>onFollow<\/code>.<\/li><li>Show a \"Popular\" badge only when followerCount &gt; 1000.<\/li><\/ul><p>Then show how a parent renders it.<\/p>", "r": ["Props interface including a function type", "Null guard returning a fragment", "Single root element", "Ternary for if/else, && for if-only", "onClick passes an arrow function, not a call", "Parent passes props with {}"], "m": "<pre><code>interface UserCardProps {\n  user: User | null;\n  isSelf: boolean;\n  onFollow: (user: User) =&gt; void;\n}\n\nconst UserCard = (props: UserCardProps) =&gt; {\n  const { user, isSelf, onFollow } = props;\n  if (!user) return &lt;&gt;&lt;/&gt;;\n\n  return (\n    &lt;div className=&quot;user-card&quot;&gt;\n      &lt;img src={user.imageUrl} alt={user.alias} /&gt;\n      &lt;h3&gt;{user.firstName} {user.lastName}&lt;/h3&gt;\n      {isSelf\n        ? &lt;span&gt;This is you&lt;/span&gt;\n        : &lt;button onClick={() =&gt; onFollow(user)}&gt;Follow&lt;/button&gt;}\n      {user.followerCount &gt; 1000 &amp;&amp; &lt;span className=&quot;badge&quot;&gt;Popular&lt;/span&gt;}\n    &lt;/div&gt;\n  );\n};\n\nexport default UserCard;\n\n// In a parent component:\n&lt;UserCard user={displayedUser} isSelf={displayedUser?.alias === currentUser?.alias}\n          onFollow={(u) =&gt; follow(u)} /&gt;<\/code><\/pre>"}, {"t": "hooks", "h": "useState + useEffect: a paged list.", "q": "<p>Given <code>loadPage(lastItem: Status | null, size: number): Promise&lt;[Status[], boolean]&gt;<\/code> (items and hasMore), write a <code>StatusList<\/code> component that:<\/p><ul><li>keeps <code>items<\/code>, <code>hasMore<\/code> and <code>lastItem<\/code> in state,<\/li><li>loads the first page once when it first renders,<\/li><li>appends each page using the functional updater,<\/li><li>shows a \"Load more\" button only while <code>hasMore<\/code> is true.<\/li><\/ul>", "r": ["Typed useState with generics and correct initial values", "useEffect with [] for initial load", "setItems(prev => [...prev, ...newItems])", "Updates hasMore and lastItem", "Button rendered with &&; list uses map with a key"], "m": "<pre><code>import { useEffect, useState } from &quot;react&quot;;\n\nconst PAGE_SIZE = 10;\n\nconst StatusList = () =&gt; {\n  const [items, setItems] = useState&lt;Status[]&gt;([]);\n  const [hasMore, setHasMore] = useState(true);\n  const [lastItem, setLastItem] = useState&lt;Status | null&gt;(null);\n\n  const loadMore = async () =&gt; {\n    const [newItems, more] = await loadPage(lastItem, PAGE_SIZE);\n    setHasMore(more);\n    if (newItems.length &gt; 0) {\n      setLastItem(newItems[newItems.length - 1]);\n    }\n    setItems(prev =&gt; [...prev, ...newItems]);\n  };\n\n  useEffect(() =&gt; {\n    loadMore();\n  }, []);                     // initial render only\n\n  return (\n    &lt;&gt;\n      {items.map((s, i) =&gt; &lt;p key={i}&gt;{s.post}&lt;/p&gt;)}\n      {hasMore &amp;&amp; &lt;button onClick={loadMore}&gt;Load more&lt;/button&gt;}\n    &lt;/&gt;\n  );\n};<\/code><\/pre>"}, {"t": "hooks", "h": "Create and use a React context.", "q": "<p>Write a <code>CartContext<\/code> that shares <code>items: string[]<\/code>, <code>addItem(item)<\/code> and <code>clear()<\/code>. Write a <code>CartProvider<\/code> that owns the state (memoize the functions and the context value), show where it goes in the tree, and write a <code>CartBadge<\/code> component that shows the item count and clears the cart on click.<\/p>", "r": ["createContext with a typed default value", "Provider owns useState", "useCallback for functions, useMemo for the value object", "Provider wraps the components that need it", "useContext + destructuring in the consumer"], "m": "<pre><code>import { createContext, useCallback, useContext, useMemo, useState, ReactNode } from &quot;react&quot;;\n\ninterface CartContextValue {\n  items: string[];\n  addItem: (item: string) =&gt; void;\n  clear: () =&gt; void;\n}\n\nexport const CartContext = createContext&lt;CartContextValue&gt;({\n  items: [],\n  addItem: () =&gt; {},\n  clear: () =&gt; {},\n});\n\nexport const CartProvider = ({ children }: { children: ReactNode }) =&gt; {\n  const [items, setItems] = useState&lt;string[]&gt;([]);\n\n  const addItem = useCallback((item: string) =&gt; {\n    setItems(prev =&gt; [...prev, item]);\n  }, []);\n  const clear = useCallback(() =&gt; setItems([]), []);\n\n  const value = useMemo(() =&gt; ({ items, addItem, clear }), [items, addItem, clear]);\n\n  return &lt;CartContext.Provider value={value}&gt;{children}&lt;/CartContext.Provider&gt;;\n};\n\n// index.tsx\n// &lt;CartProvider&gt;\n//   &lt;App /&gt;\n// &lt;/CartProvider&gt;\n\nconst CartBadge = () =&gt; {\n  const { items, clear } = useContext(CartContext);\n  return &lt;button onClick={clear}&gt;Cart ({items.length})&lt;/button&gt;;\n};<\/code><\/pre>"}, {"t": "hooks", "h": "Write a custom hook.", "q": "<p>Write <code>useCounter(initial = 0)<\/code> that returns <code>{ count, increment, reset }<\/code>, where <code>increment<\/code> takes an optional step (default 1). Give it a return-type interface, memoize the functions, and show a component using it.<\/p>", "r": ["Name starts with use", "Return-type interface with optional parameter", "useState inside; functional updater", "useCallback for returned functions", "Component destructures the result"], "m": "<pre><code>import { useCallback, useState } from &quot;react&quot;;\n\ninterface Counter {\n  count: number;\n  increment: (step?: number) =&gt; void;\n  reset: () =&gt; void;\n}\n\nexport const useCounter = (initial: number = 0): Counter =&gt; {\n  const [count, setCount] = useState(initial);\n\n  const increment = useCallback((step: number = 1) =&gt; {\n    setCount(prev =&gt; prev + step);\n  }, []);\n\n  const reset = useCallback(() =&gt; setCount(initial), [initial]);\n\n  return { count, increment, reset };\n};\n\nconst LikeButton = () =&gt; {\n  const { count, increment, reset } = useCounter();\n  return (\n    &lt;&gt;\n      &lt;button onClick={() =&gt; increment()}&gt;Like ({count})&lt;/button&gt;\n      &lt;button onClick={reset}&gt;Reset&lt;/button&gt;\n    &lt;/&gt;\n  );\n};<\/code><\/pre>"}, {"t": "router", "h": "Write the Tweeter-style routes.", "q": "<p>Using React Router, write <code>App<\/code> plus two route components:<\/p><ul><li><b>UnauthenticatedRoutes<\/b>: <code>/login<\/code> → <code>Login<\/code>, <code>/register<\/code> → <code>Register<\/code>, anything else → <code>Login<\/code> with an <code>originalUrl<\/code> prop set to the current path.<\/li><li><b>AuthenticatedRoutes<\/b>: a layout route using <code>MainLayout<\/code>; the index redirects to <code>/feed/&lt;alias&gt;<\/code>; <code>feed/:displayedUser<\/code> → <code>FeedScroller<\/code>; <code>followers/:displayedUser<\/code> → <code>FollowersScroller<\/code>; <code>logout<\/code> redirects to <code>/login<\/code>; anything else redirects to the feed.<\/li><li><b>App<\/b> picks one based on whether there's a current user and auth token.<\/li><\/ul><p>Also write <code>MainLayout<\/code> and show how <code>FeedScroller<\/code> reads <code>displayedUser<\/code>.<\/p>", "r": ["BrowserRouter once, wrapping Routes", "Ternary choosing route set", "useLocation for originalUrl; path=\"*\"", "Layout route with no path; Outlet in MainLayout", "index + Navigate; dynamic :displayedUser", "useParams in FeedScroller"], "m": "<pre><code>import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation, useParams } from &quot;react-router-dom&quot;;\n\nconst App = () =&gt; {\n  const { currentUser, authToken } = useContext(UserInfoContext);\n  const isAuthenticated = (): boolean =&gt; !!currentUser &amp;&amp; !!authToken;\n\n  return (\n    &lt;BrowserRouter&gt;\n      {isAuthenticated() ? &lt;AuthenticatedRoutes /&gt; : &lt;UnauthenticatedRoutes /&gt;}\n    &lt;/BrowserRouter&gt;\n  );\n};\n\nconst AuthenticatedRoutes = () =&gt; {\n  const { displayedUser } = useContext(UserInfoContext);\n  return (\n    &lt;Routes&gt;\n      &lt;Route element={&lt;MainLayout /&gt;}&gt;\n        &lt;Route index element={&lt;Navigate to={`/feed/${displayedUser!.alias}`} /&gt;} /&gt;\n        &lt;Route path=&quot;feed/:displayedUser&quot; element={&lt;FeedScroller /&gt;} /&gt;\n        &lt;Route path=&quot;followers/:displayedUser&quot; element={&lt;FollowersScroller /&gt;} /&gt;\n        &lt;Route path=&quot;logout&quot; element={&lt;Navigate to=&quot;/login&quot; /&gt;} /&gt;\n        &lt;Route path=&quot;*&quot; element={&lt;Navigate to={`/feed/${displayedUser!.alias}`} /&gt;} /&gt;\n      &lt;/Route&gt;\n    &lt;/Routes&gt;\n  );\n};\n\nconst UnauthenticatedRoutes = () =&gt; {\n  const location = useLocation();\n  return (\n    &lt;Routes&gt;\n      &lt;Route path=&quot;/login&quot; element={&lt;Login /&gt;} /&gt;\n      &lt;Route path=&quot;/register&quot; element={&lt;Register /&gt;} /&gt;\n      &lt;Route path=&quot;*&quot; element={&lt;Login originalUrl={location.pathname} /&gt;} /&gt;\n    &lt;/Routes&gt;\n  );\n};\n\nconst MainLayout = () =&gt; (\n  &lt;&gt;\n    &lt;AppNavbar /&gt;\n    &lt;div className=&quot;row&quot;&gt;\n      &lt;div className=&quot;col-4&quot;&gt;&lt;UserInfo /&gt;&lt;/div&gt;\n      &lt;div className=&quot;col-8&quot;&gt;&lt;Outlet /&gt;&lt;/div&gt;\n    &lt;/div&gt;\n  &lt;/&gt;\n);\n\nconst FeedScroller = () =&gt; {\n  const { displayedUser } = useParams();   // from feed/:displayedUser\n  // ...\n};<\/code><\/pre>"}, {"t": "ui", "h": "MVP in React: a login view and presenter.", "q": "<p>Write a <code>LoginView<\/code> interface (<code>setLoading<\/code>, <code>displayErrorMessage<\/code>, <code>navigate<\/code>) and a <code>LoginPresenter<\/code> class whose <code>doLogin(alias, password)<\/code> calls <code>UserService.login()<\/code> (returns <code>Promise&lt;[User, AuthToken]&gt;<\/code>), navigates to <code>/feed/&lt;alias&gt;<\/code> on success, shows an error on failure, and always turns loading off. Then write the <code>Login<\/code> component that supplies a listener and keeps the presenter in a ref.<\/p>", "r": ["View interface with only UI operations", "Presenter takes the view in its constructor", "try / catch / finally around the async call", "Component builds a listener object typed as the interface", "useRef so the presenter is created once", "Component delegates to the presenter; no service calls in the component"], "m": "<pre><code>export interface LoginView {\n  setLoading: (loading: boolean) =&gt; void;\n  displayErrorMessage: (message: string) =&gt; void;\n  navigate: (url: string) =&gt; void;\n}\n\nexport class LoginPresenter {\n  private service = new UserService();\n\n  constructor(private view: LoginView) {}\n\n  async doLogin(alias: string, password: string): Promise&lt;void&gt; {\n    this.view.setLoading(true);\n    try {\n      const [user, authToken] = await this.service.login(alias, password);\n      this.view.navigate(`/feed/${user.alias}`);\n    } catch (error) {\n      this.view.displayErrorMessage(`Failed to log in: ${(error as Error).message}`);\n    } finally {\n      this.view.setLoading(false);\n    }\n  }\n}\n\nconst Login = () =&gt; {\n  const [alias, setAlias] = useState(&quot;&quot;);\n  const [password, setPassword] = useState(&quot;&quot;);\n  const [isLoading, setLoading] = useState(false);\n  const navigate = useNavigate();\n  const { displayErrorMessage } = useMessageActions();\n\n  const listener: LoginView = {\n    setLoading,\n    displayErrorMessage,\n    navigate: (url: string) =&gt; navigate(url),\n  };\n\n  const presenterRef = useRef&lt;LoginPresenter | null&gt;(null);\n  if (!presenterRef.current) {\n    presenterRef.current = new LoginPresenter(listener);\n  }\n\n  return (\n    &lt;form onSubmit={(e) =&gt; { e.preventDefault(); presenterRef.current!.doLogin(alias, password); }}&gt;\n      &lt;input value={alias} onChange={(e) =&gt; setAlias(e.target.value)} /&gt;\n      &lt;input type=&quot;password&quot; value={password} onChange={(e) =&gt; setPassword(e.target.value)} /&gt;\n      &lt;button disabled={isLoading || !alias || !password}&gt;Sign in&lt;/button&gt;\n    &lt;/form&gt;\n  );\n};<\/code><\/pre>"}]};
+
+/* tabs */
+const PANELS=['guide','fc','tf','mc','es','cw'];
+const tabs=[...document.querySelectorAll('nav.tabs button')];
+function showTab(p){if(!PANELS.includes(p))p='guide';tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));PANELS.forEach(x=>document.getElementById('p-'+x).hidden=x!==p);try{localStorage.setItem('cs340-tab',p)}catch(e){}}
+tabs.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.p)));
+try{const t=localStorage.getItem('cs340-tab');if(t)showTab(t)}catch(e){}
+
+function fillTopics(sel,items){const used=new Set(items.map(x=>x.t));sel.innerHTML='<option value="all">All topics</option>'+Object.entries(TOPICS).filter(([k])=>used.has(k)).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* flashcards */
+let known=new Set(store.get('cs340-known',[]));
+const saveKnown=()=>store.set('cs340-known',[...known]);
+const fcSel=document.getElementById('fc-topic');fillTopics(fcSel,CARDS.map(c=>({t:c[0]})));
+let deck=[],idx=0,flipped=false;
+function buildDeck(){const t=fcSel.value,hide=document.getElementById('fc-hide').checked;deck=CARDS.map((c,i)=>i).filter(i=>(t==='all'||CARDS[i][0]===t)&&!(hide&&known.has(i)));idx=0;flipped=false;renderCard()}
+function renderCard(){const card=document.getElementById('fc-card'),txt=document.getElementById('fc-txt');
+  if(!deck.length){txt.innerHTML='No cards left in this set. Uncheck “Hide cards I know” to review them again.';txt.className='txt';document.getElementById('fc-side').textContent='';document.getElementById('fc-tp').textContent='';document.getElementById('fc-count').textContent='';card.classList.remove('back');return}
+  const c=CARDS[deck[idx]];card.classList.toggle('back',flipped);txt.className='txt'+(flipped?' ans':'');txt.innerHTML=flipped?c[2]:c[1];
+  document.getElementById('fc-side').textContent=flipped?'ANSWER':'PROMPT';document.getElementById('fc-tp').textContent=TOPICS[c[0]];
+  document.getElementById('fc-count').textContent=`${idx+1} / ${deck.length} · ${known.size} known`;
+  document.getElementById('fc-know').textContent=known.has(deck[idx])?'Mark as not known':'I know this'}
+const flip=()=>{flipped=!flipped;renderCard()};
+const move=d=>{if(!deck.length)return;idx=(idx+d+deck.length)%deck.length;flipped=false;renderCard()};
+document.getElementById('fc-card').addEventListener('click',flip);
+document.getElementById('fc-flip').addEventListener('click',flip);
+document.getElementById('fc-next').addEventListener('click',()=>move(1));
+document.getElementById('fc-prev').addEventListener('click',()=>move(-1));
+document.getElementById('fc-shuffle').addEventListener('click',()=>{for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]]}idx=0;flipped=false;renderCard()});
+document.getElementById('fc-know').addEventListener('click',()=>{if(!deck.length)return;const i=deck[idx];known.has(i)?known.delete(i):known.add(i);saveKnown();if(document.getElementById('fc-hide').checked){deck.splice(idx,1);if(idx>=deck.length)idx=0;flipped=false}renderCard()});
+fcSel.addEventListener('change',buildDeck);document.getElementById('fc-hide').addEventListener('change',buildDeck);
+document.addEventListener('keydown',e=>{if(document.getElementById('p-fc').hidden||/SELECT|INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key===' '){e.preventDefault();flip()}else if(e.key==='ArrowRight')move(1);else if(e.key==='ArrowLeft')move(-1)});
+buildDeck();
+
+/* objective sections (T/F and M/C) */
+function objective(key,items,isTF){
+  const st={sel:{},graded:false};
+  const sel=document.getElementById(key+'-topic'),list=document.getElementById(key+'-list'),bub=document.getElementById(key+'-bubbles');
+  const instant=document.getElementById(key+'-instant');
+  fillTopics(sel,items);
+  const opts=q=>isTF?['True','False']:q.o;
+  const ans=q=>isTF?(q.a?0:1):q.a;
+  const visible=()=>items.map((q,i)=>i).filter(i=>sel.value==='all'||items[i].t===sel.value);
+  const revealed=i=>st.graded||(instant.checked&&i in st.sel);
+  function render(){
+    const ids=visible();list.innerHTML='';
+    bub.innerHTML='<span class="lbl">Answer sheet · tap a number to jump</span>';
+    ids.forEach((qi,n)=>{const q=items[qi];
+      const b=document.createElement('button');b.className='bub';b.textContent=n+1;b.title='Question '+(n+1);
+      if(qi in st.sel)b.classList.add(revealed(qi)?(st.sel[qi]===ans(q)?'ok':'no'):'filled');
+      b.addEventListener('click',()=>document.getElementById(key+'-q'+qi).scrollIntoView({behavior:'smooth',block:'center'}));bub.appendChild(b);
+      const d=document.createElement('div');d.className='q'+(isTF?' tf':'');d.id=key+'-q'+qi;
+      d.innerHTML=`<div class="meta">${n+1}. ${TOPICS[q.t]}</div><div class="stem">${q.q}</div><div class="opts"></div>`;
+      const box=d.querySelector('.opts');
+      opts(q).forEach((o,oi)=>{const b=document.createElement('button');b.className='opt';b.textContent=(isTF?'':String.fromCharCode(65+oi)+'.  ')+o.replace(/<\/?code>/g,'');
+        if(revealed(qi)){b.disabled=true;if(oi===ans(q))b.classList.add('right');else if(oi===st.sel[qi])b.classList.add('wrong')}
+        else if(st.sel[qi]===oi)b.classList.add('sel');
+        b.addEventListener('click',()=>{st.sel[qi]=oi;render()});box.appendChild(b)});
+      if(revealed(qi)){const w=document.createElement('div');w.className='why';
+        w.innerHTML=(qi in st.sel?(st.sel[qi]===ans(q)?'<b>Correct.</b> ':'<b>Incorrect.</b> '):'<b>Unanswered.</b> ')+(isTF?`<b>${q.a?'True':'False'}:</b> `:'')+q.w;d.appendChild(w)}
+      list.appendChild(d)});
+    const done=ids.filter(i=>i in st.sel),right=done.filter(i=>st.sel[i]===ans(items[i]));
+    const showScore=st.graded||instant.checked;
+    document.getElementById(key+'-score').textContent=`${done.length} / ${ids.length} answered`+(showScore?` · ${right.length} correct (${ids.length?Math.round(100*right.length/ids.length):0}% of section)`:'');
+    document.getElementById(key+'-grade').textContent=st.graded?'Retake section':'Grade section';
+  }
+  document.getElementById(key+'-grade').addEventListener('click',()=>{if(st.graded){st.sel={};st.graded=false;window.scrollTo({top:list.offsetTop-120})}else st.graded=true;render()});
+  document.getElementById(key+'-reset').addEventListener('click',()=>{st.sel={};st.graded=false;render()});
+  sel.addEventListener('change',()=>{st.graded=false;render()});instant.addEventListener('change',render);
+  render();
+}
+objective('tf',DATA.TF,true);
+objective('mc',DATA.MC,false);
+
+/* written sections (essay and code) */
+function written(key,items,isCode){
+  const sel=document.getElementById(key+'-topic'),list=document.getElementById(key+'-list');fillTopics(sel,items);
+  function render(){list.innerHTML='';let n=0;
+    items.forEach((q,qi)=>{if(sel.value!=='all'&&q.t!==sel.value)return;n++;
+      const id=`${key}-${qi}`,d=document.createElement('div');d.className='pq';
+      const checks=store.get('cs340-chk-'+id,[]);
+      d.innerHTML=`<div class="meta">${isCode?'Code':'Essay'} ${n} · ${TOPICS[q.t]}</div>`+
+        (isCode?`<div class="stem">${q.h}</div><div class="given">${q.q}</div>`:`<div class="stem">${q.q}</div>`)+
+        `<textarea class="work${isCode?'':' essay'}" id="${id}-ans" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="${isCode?'Write your TypeScript here (or on paper)…':'Write your answer here (or on paper)…'}"></textarea>`+
+        `<div class="row"><button class="btn ghost" data-a="rub">Check against grading points</button><button class="btn ghost" data-a="model">Show model answer</button><span class="saved" id="${id}-saved"></span></div>`+
+        `<div class="rubric" data-s="rub" hidden><h4>Grading points</h4>${q.r.map((r,ri)=>`<label><input type="checkbox" id="${id}-r${ri}" ${checks.includes(ri)?'checked':''}> <span>${r}</span></label>`).join('')}</div>`+
+        `<div class="rubric" data-s="model" hidden><h4>Model answer</h4>${q.m}</div>`;
+      const ta=d.querySelector('textarea');ta.value=store.get('cs340-ans-'+id,'');
+      let t;ta.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{store.set('cs340-ans-'+id,ta.value);document.getElementById(id+'-saved').textContent='Draft saved in this browser'},400)});
+      if(isCode)ta.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();const s=ta.selectionStart;ta.setRangeText('  ',s,ta.selectionEnd,'end')}});
+      d.querySelectorAll('[data-a]').forEach(b=>b.addEventListener('click',()=>{const p=d.querySelector(`[data-s="${b.dataset.a}"]`);p.hidden=!p.hidden;b.textContent=(p.hidden?(b.dataset.a==='rub'?'Check against grading points':'Show model answer'):(b.dataset.a==='rub'?'Hide grading points':'Hide model answer'))}));
+      d.querySelectorAll('.rubric input').forEach((c,ri)=>c.addEventListener('change',()=>{const cur=new Set(store.get('cs340-chk-'+id,[]));c.checked?cur.add(ri):cur.delete(ri);store.set('cs340-chk-'+id,[...cur])}));
+      list.appendChild(d)})}
+  sel.addEventListener('change',render);render();
+}
+written('es',DATA.ES,false);
+written('cw',DATA.CW,true);
+</script>
+</body>
+</html>
