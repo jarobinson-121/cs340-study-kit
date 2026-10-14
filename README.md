@@ -7,6 +7,7 @@ An unofficial study kit for BYU CS 340 (Software Design), Fall 2026, covering ev
 What's inside:
 
 - **Study guide**: condensed notes from each topic's lecture slides
+- **UML diagrams**: drawn examples of every class-diagram notation from the slides, plus Observer, package and sequence diagrams
 - **Flashcards**: 79 cards with a topic filter
 - **True / False** and **Multiple choice**: bubble-sheet style sections you grade all at once, each with three forms (A, B, C) of different questions on the same topics
 - **Essay**: written prompts with grading points and model answers
